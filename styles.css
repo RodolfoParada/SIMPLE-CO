@@ -1,0 +1,31 @@
+.poleras{
+   width: 100px;
+   height: 100px;
+}
+
+.items{
+   display: flex;
+   margin-left: 300px;
+   margin-top: -33px;
+}
+
+ .precio1{
+   display: flex;
+   margin-left: 280px;
+}
+
+.precio2{
+    display: flex;
+   margin-left: -65px;
+}
+
+.precio3{
+    display: flex;
+   margin-left: 280px;
+}
+
+.precioArticulos{
+   display: flex;
+   margin-left: 500px;
+   margin-top: -40px;
+}
