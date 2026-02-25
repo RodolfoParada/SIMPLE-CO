@@ -5,19 +5,17 @@ export class Modal {
         if (existing) existing.remove();
 
         const modalHTML = `
-            <div id="custom-modal"
-                 class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-                 style="background: rgba(0,0,0,0.5); z-index: 2000;">
+            <div id="custom-modal" class="custom-modal-overlay">
 
-                <div class="bg-white p-4 rounded shadow text-center"
-                     style="min-width: 300px; max-width: 400px;">
+                <div class="custom-modal-box">
 
-                    <h5 class="mb-3">Producto agregado</h5>
+                    <h5>Producto agregado</h5>
                     <p>${message}</p>
 
-                    <button class="btn btn-primary mt-3" id="modal-close">
+                    <button class="custom-modal-btn" id="modal-close">
                         Aceptar
                     </button>
+
                 </div>
             </div>
         `;
