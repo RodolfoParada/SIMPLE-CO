@@ -8,7 +8,7 @@ export const Views = {
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 shadow-sm">
                         <img src="${p.url}" 
-                             class="card-img-top p-3" 
+                             class="producto-img img-fluid card-img-top p-3" 
                              style="height:300px; object-fit:contain;">
 
                         <div class="card-body text-center">

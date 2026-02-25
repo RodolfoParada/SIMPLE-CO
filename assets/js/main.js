@@ -1,6 +1,8 @@
 import { Router } from './router.js';
 import { Views } from './views.js';
 import { Pagination } from './components/Pagination.js';
+import { Modal } from './components/Modal.js';
+import { ImagenClick } from './components/ImagenClick.js';
 
 let productosData = [];
 let carrito = [];
@@ -8,7 +10,7 @@ let pagination;
 
 const iniciarApp = async () => {
 
-    aplicarModoGuardado();
+   aplicarModoGuardado();
    iniciarModoOscuro(); 
 
     const res = await fetch('./data/productos.json');
@@ -21,19 +23,19 @@ const iniciarApp = async () => {
 
     const miRouter = new Router(rutas, "view-container");
 
-    document.addEventListener("vistaCargada", () => {
-        asignarEventosCompra();
-        if (pagination) {
-            pagination.attachEvents();
-        }
-    });
+  document.addEventListener("vistaCargada", () => {
+    asignarEventosCompra();
+    activarImagenClick();
+    if (pagination) {
+        pagination.attachEvents();
+    }
+});
 
     miRouter._render("/");
 };
 
 function renderCatalogo() {
 
-    // 🔹 Recuperar página guardada
     const paginaGuardada = localStorage.getItem("paginaActual");
 
     pagination = new Pagination({
@@ -42,11 +44,17 @@ function renderCatalogo() {
         currentPage: paginaGuardada ? parseInt(paginaGuardada) : 1,
         onPageChange: (newPage) => {
 
-            // 🔥 Guardar nueva página
             localStorage.setItem("paginaActual", newPage);
+            pagination.currentPage = newPage;
 
-            document.getElementById("view-container").innerHTML = renderCatalogo();
+            // SOLO DISPARA EL ROUTER OTRA VEZ
+            const productosPagina = pagination.paginate(productosData);
+
+            document.getElementById("view-container").innerHTML =
+                Views.catalogo(productosPagina, pagination.render());
+
             asignarEventosCompra();
+            activarImagenClick();
             pagination.attachEvents();
         }
     });
@@ -58,14 +66,21 @@ function renderCatalogo() {
         pagination.render()
     );
 }
-
+function activarImagenClick() {
+    document.querySelectorAll('.producto-img').forEach(img => {
+        img.style.cursor = "zoom-in";
+        img.onclick = () => {
+            ImagenClick.open(img.src);
+        };
+    });
+}
 function asignarEventosCompra() {
     document.querySelectorAll('.btn-add').forEach(btn => {
         btn.onclick = (e) => {
             const id = e.target.dataset.id;
             const producto = productosData.find(p => p.id == id);
             carrito.push(producto);
-            alert(`Añadido: ${producto.nombre}`);
+            Modal.show(`Se agregó "${producto.nombre}" al carrito.`);
         };
     });
 }
