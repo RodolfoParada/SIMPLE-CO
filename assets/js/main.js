@@ -47,7 +47,7 @@ function renderCatalogo() {
             localStorage.setItem("paginaActual", newPage);
             pagination.currentPage = newPage;
 
-            // 🔥 SOLO DISPARA EL ROUTER OTRA VEZ
+            // SOLO DISPARA EL ROUTER OTRA VEZ
             const productosPagina = pagination.paginate(productosData);
 
             document.getElementById("view-container").innerHTML =
