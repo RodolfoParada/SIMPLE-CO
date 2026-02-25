@@ -1,6 +1,7 @@
 import { Router } from './router.js';
 import { Views } from './views.js';
 import { Pagination } from './components/Pagination.js';
+import { Modal } from './components/Modal.js';
 
 let productosData = [];
 let carrito = [];
@@ -65,7 +66,7 @@ function asignarEventosCompra() {
             const id = e.target.dataset.id;
             const producto = productosData.find(p => p.id == id);
             carrito.push(producto);
-            alert(`Añadido: ${producto.nombre}`);
+            Modal.show(`Se agregó "${producto.nombre}" al carrito.`);
         };
     });
 }
