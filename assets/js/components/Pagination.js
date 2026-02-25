@@ -38,6 +38,8 @@ export class Pagination {
         `;
     }
 
+    
+
     attachEvents() {
         document.querySelectorAll('.btn-page').forEach(btn => {
             btn.addEventListener("click", (e) => {
@@ -50,4 +52,6 @@ export class Pagination {
             });
         });
     }
+
+  
 }

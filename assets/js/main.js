@@ -33,11 +33,18 @@ const iniciarApp = async () => {
 
 function renderCatalogo() {
 
+    // 🔹 Recuperar página guardada
+    const paginaGuardada = localStorage.getItem("paginaActual");
+
     pagination = new Pagination({
         totalItems: productosData.length,
         itemsPerPage: 6,
-        currentPage: pagination?.currentPage || 1,
-        onPageChange: () => {
+        currentPage: paginaGuardada ? parseInt(paginaGuardada) : 1,
+        onPageChange: (newPage) => {
+
+            // 🔥 Guardar nueva página
+            localStorage.setItem("paginaActual", newPage);
+
             document.getElementById("view-container").innerHTML = renderCatalogo();
             asignarEventosCompra();
             pagination.attachEvents();
