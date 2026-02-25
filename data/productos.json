@@ -1,0 +1,166 @@
+[
+    {
+        "id": 1,
+        "nombre": "Polera Negra",
+        "color": "Negra",
+        "precio": 15990,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_2X_856166-MLC84267340709_052025-F-polera-premium-algodon-100-manga-corta-basico-estampar.webp"
+    },
+    {
+        "id": 2,
+        "nombre": "Polera Verde",
+        "color": "Verde",
+        "precio": 15990,
+        "url": "https://img.kwcdn.com/thumbnail/s/874718de1348af5bd680e52f3346c44a_b0c87997d893.jpeg?imageView2/2/w/800/q/70/format/avif"
+    },
+    {
+        "id": 3,
+        "nombre": "Polera Café",
+        "color": "Negro Toro",
+        "precio": 15990,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_2X_684100-MLC105228354864_012026-F-polera-algodon-100-manga-corta-premium-unisex-para-estampar.webp"
+    },
+       {
+        "id": 4,
+        "nombre": "Polera Anime Tanjiro Kamado",
+        "color": "Negra",
+        "precio": 15990,
+        "url": "https://unika.cl/wp-content/uploads/2024/07/poleras-anime-tanjiro-kamado-ink-dise-o-manga.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "Polera Gris",
+        "color": "Gris",
+       "precio": 15990,
+        "url": "https://s-print.cl/wp-content/uploads/2022/05/Polera_Mantis_Organic-Button-Henley_T_1.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "Polera Balenciaga",
+        "color": "Negro",
+        "precio": 15990,
+        "url": "https://reserved.cl/cdn/shop/files/PODCAST-2025-07-02T152108.884.png?v=1751484060&width=600"
+    },
+
+    {
+        "id": 7,
+        "nombre": "Polera Granate",
+        "color": "Granate",
+        "precio": 15990,
+        "url": "https://www.roly.cl/media/catalog/product/cache/5bbf92fd90264cfd0d036d0d3ff79904/c/a/ca6502_dogo_polera_granate_frente_23.jpg"
+    },
+    {
+        "id": 8,
+        "nombre": "Polera Cian",
+        "color": "Cian",
+       "precio": 15990,
+        "url": "https://www.roly.cl/media/catalog/product/cache/5bbf92fd90264cfd0d036d0d3ff79904/c/a/ca6502_dogo_polera_turquesa_frente_22.jpg"
+    },
+    {
+        "id": 9,
+        "nombre": "Polera Rojo",
+        "color": "Rojo",
+        "precio": 15990,
+        "url": "https://www.roly.cl/media/catalog/product/cache/df194ede19a81c4cc373fc8906917f61/p/o/polera-dogo-premium-color-2-1.jpg"
+    },
+       {
+        "id": 10,
+        "nombre": "Polera Verde-Claro",
+        "color": "Verde Claro",
+        "precio": 15990,
+        "url": "https://www.roly.cl/media/catalog/product/cache/5bbf92fd90264cfd0d036d0d3ff79904/m/o/modelouno.jpg"
+    },
+    {
+        "id": 11,
+        "nombre": "Polera Naranja",
+        "color": "Naranja",
+       "precio": 15990,
+        "url": "https://sumey.cl/wp-content/uploads/2025/01/NARANJO.jpg"
+    },
+    {
+        "id": 12,
+        "nombre": "Polera Azul",
+        "color": "Azul",
+        "precio": 15990,
+        "url": "https://fashionspark.com/cdn/shop/files/p-950372001-2_2048x2048.jpg?v=1756391142"
+    },
+     {
+        "id": 13,
+        "nombre": "Polera Crema Las Vegas",
+        "color": "Crema",
+       "precio": 15990,
+        "url": "https://reserved.cl/cdn/shop/files/FOTOS_RESERVEDcopia_40077f67-abf2-4e2f-ac0f-5849b682d72f.jpg?v=1770136463&width=600"   
+     },
+       {
+        "id": 14,
+        "nombre": "Polera Off-White ",
+        "color": "Rojo",
+        "precio": 15990,
+        "url": "https://reserved.cl/cdn/shop/files/httpswww.google.comurlsa_i_url_https_3A_2F_2Fwww.harrods.com_2Fen-gb_2Fshopping_2Foff-white-mona-lisa-hoodie-17678634_psig_AOvVaw3DkrMbTm7FCFQtn2XHQ9oR_ust_1708888420482000_source_ima_4955bfb8-ffbb-4f99-bbfc-8a765f29750b.png?v=1756420353&width=600"   
+     },
+      {
+        "id": 15,
+        "nombre": "Polera Blanca",
+        "color": "Blanca",
+        "precio": 15990,
+        "url": "https://aiconcept.cl/cdn/shop/files/polera_100_algodon_11.png?v=1723137530"   
+     },
+      {
+        "id": 16,
+        "nombre": "Polera Estoy Bien",
+        "color": "Negra",
+        "precio": 15990,
+        "url": "https://mokingskills.com/cdn/shop/files/Polera-oficial-estoy-bien-logo-negra-front.png?v=1755822092&width=990"   
+     },
+      {
+        "id": 17,
+        "nombre": "Polera Resident Evil",
+        "color": "Negra",
+       "precio": 15990,
+        "url": "https://cycorecords.cl/cdn/shop/files/p-sk27082027-1-b6d052a8-fded-48b2-995f-ba4c20aac003.jpg?v=1725378833&width=1000"   
+     },
+      {
+        "id": 18,
+        "nombre": "Polera Superman",
+        "color": "Azul",
+        "precio": 15990,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_2X_838508-MLC97329232767_112025-F-polera-superman-color-gustore.webp"   
+     },
+      {
+        "id": 19,
+        "nombre": "Polera The Flash",
+        "color": "Rojo",
+        "precio": 15990,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_2X_743382-MLC83870339856_042025-F-poleras-flash-serie-the-flash-logo-hombre-grafimax.webp"   
+     }, {
+        "id": 20,
+        "nombre": "Polera Wolverine",
+        "color": "Negra",
+        "precio": 15990,
+        "url": "https://www.discoreal.cl/cdn/shop/files/PostPolerasRetro_peliculas_series_51_1024x1024@2x.png?v=1726604484"   
+     }, {
+        "id": 21,
+        "nombre": "Polera Magneto",
+        "color": "Negra",
+       "precio": 15990,
+        "url": "https://cdnx.jumpseller.com/estampados-bettoskys/image/29747962/resize/640/640?1669410935"   
+     }, {
+        "id": 22,
+        "nombre": "Polera X-MEN",
+        "color": "Blanca",
+        "precio": 15990,
+        "url": "https://goetia.cl/cdn/shop/files/3_5d21e578-e899-4347-949e-82728299789c.webp?v=1739408662&width=810"   
+     }, {
+        "id": 23,
+        "nombre": "Polera Cyclope",
+        "color": "Rojo",
+    "precio": 15990,
+        "url": "https://www.mandragorastore.com/wp-content/uploads/2020/06/Cine-Camiseta-C%C3%ADclope-de-X-Men.jpg"   
+     }, {
+        "id": 24,
+        "nombre": "Polera Advengers",
+        "color": "Negra",
+      "precio": 15990,
+        "url": "https://cdnx.jumpseller.com/tienda-amarilla/image/20046444/resize/900/900?1636322897"   
+     }
+]
