@@ -4,6 +4,15 @@
         "nombre": "Polera Negra",
         "color": "Negra",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 300 },
+                { "talla": "S", "stock": 500 },
+                { "talla": "M", "stock": 100 },
+                { "talla": "L", "stock": 90 },
+                { "talla": "XL", "stock": 5 },
+                { "talla": "XXL", "stock": 25 },
+                { "talla": "XXL", "stock": 20 }
+         ],
         "url": "https://http2.mlstatic.com/D_NQ_NP_2X_856166-MLC84267340709_052025-F-polera-premium-algodon-100-manga-corta-basico-estampar.webp"
     },
     {
@@ -11,6 +20,15 @@
         "nombre": "Polera Verde",
         "color": "Verde",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 1000 },
+                { "talla": "S", "stock": 1500 },
+                { "talla": "M", "stock": 200 },
+                { "talla": "L", "stock": 300},
+                { "talla": "XL", "stock": 500},
+                { "talla": "XXL", "stock": 250},
+                { "talla": "XXL", "stock": 200 }
+         ],
         "url": "https://img.kwcdn.com/thumbnail/s/874718de1348af5bd680e52f3346c44a_b0c87997d893.jpeg?imageView2/2/w/800/q/70/format/avif"
     },
     {
@@ -18,6 +36,15 @@
         "nombre": "Polera Café",
         "color": "Negro Toro",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 500 },
+                { "talla": "S", "stock": 300 },
+                { "talla": "M", "stock": 100 },
+                { "talla": "L", "stock": 600},
+                { "talla": "XL", "stock": 400},
+                { "talla": "XXL", "stock": 50},
+                { "talla": "XXL", "stock": 20 }
+         ],
         "url": "https://http2.mlstatic.com/D_NQ_NP_2X_684100-MLC105228354864_012026-F-polera-algodon-100-manga-corta-premium-unisex-para-estampar.webp"
     },
        {
@@ -25,6 +52,15 @@
         "nombre": "Polera Anime Tanjiro Kamado",
         "color": "Negra",
         "precio": 15990,
+             "poleras": [
+                { "talla": "XS", "stock": 200 },
+                { "talla": "S", "stock": 100 },
+                { "talla": "M", "stock": 30 },
+                { "talla": "L", "stock": 90},
+                { "talla": "XL", "stock": 40},
+                { "talla": "XXL", "stock": 30},
+                { "talla": "XXL", "stock": 10 }
+         ],
         "url": "https://unika.cl/wp-content/uploads/2024/07/poleras-anime-tanjiro-kamado-ink-dise-o-manga.jpg"
     },
     {
@@ -32,6 +68,15 @@
         "nombre": "Polera Gris",
         "color": "Gris",
        "precio": 15990,
+            "poleras": [
+                { "talla": "XS", "stock": 333 },
+                { "talla": "S", "stock": 67 },
+                { "talla": "M", "stock": 98 },
+                { "talla": "L", "stock": 450},
+                { "talla": "XL", "stock": 365},
+                { "talla": "XXL", "stock": 60},
+                { "talla": "XXL", "stock": 30 }
+         ],
         "url": "https://s-print.cl/wp-content/uploads/2022/05/Polera_Mantis_Organic-Button-Henley_T_1.jpg"
     },
     {
@@ -39,6 +84,15 @@
         "nombre": "Polera Balenciaga",
         "color": "Negro",
         "precio": 15990,
+            "poleras": [
+                { "talla": "XS", "stock": 110 },
+                { "talla": "S", "stock": 222 },
+                { "talla": "M", "stock": 444 },
+                { "talla": "L", "stock": 658},
+                { "talla": "XL", "stock": 810},
+                { "talla": "XXL", "stock": 345},
+                { "talla": "XXL", "stock": 205}
+         ],
         "url": "https://reserved.cl/cdn/shop/files/PODCAST-2025-07-02T152108.884.png?v=1751484060&width=600"
     },
 
@@ -47,13 +101,31 @@
         "nombre": "Polera Granate",
         "color": "Granate",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 610 },
+                { "talla": "S", "stock": 170 },
+                { "talla": "M", "stock": 958 },
+                { "talla": "L", "stock": 852},
+                { "talla": "XL", "stock": 456},
+                { "talla": "XXL", "stock": 501},
+                { "talla": "XXL", "stock": 365 }
+         ],
         "url": "https://www.roly.cl/media/catalog/product/cache/5bbf92fd90264cfd0d036d0d3ff79904/c/a/ca6502_dogo_polera_granate_frente_23.jpg"
     },
     {
         "id": 8,
         "nombre": "Polera Cian",
         "color": "Cian",
-       "precio": 15990,
+        "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 845 },
+                { "talla": "S", "stock": 965 },
+                { "talla": "M", "stock": 486 },
+                { "talla": "L", "stock": 367},
+                { "talla": "XL", "stock": 999},
+                { "talla": "XXL", "stock": 457},
+                { "talla": "XXL", "stock": 111}
+         ],
         "url": "https://www.roly.cl/media/catalog/product/cache/5bbf92fd90264cfd0d036d0d3ff79904/c/a/ca6502_dogo_polera_turquesa_frente_22.jpg"
     },
     {
@@ -61,6 +133,15 @@
         "nombre": "Polera Rojo",
         "color": "Rojo",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 10 },
+                { "talla": "S", "stock": 10 },
+                { "talla": "M", "stock": 10 },
+                { "talla": "L", "stock": 15},
+                { "talla": "XL", "stock": 35},
+                { "talla": "XXL", "stock": 45},
+                { "talla": "XXL", "stock": 50}
+         ],
         "url": "https://www.roly.cl/media/catalog/product/cache/df194ede19a81c4cc373fc8906917f61/p/o/polera-dogo-premium-color-2-1.jpg"
     },
        {
@@ -68,13 +149,31 @@
         "nombre": "Polera Verde-Claro",
         "color": "Verde Claro",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 5110 },
+                { "talla": "S", "stock": 8910 },
+                { "talla": "M", "stock": 1010 },
+                { "talla": "L", "stock": 1587},
+                { "talla": "XL", "stock": 1350},
+                { "talla": "XXL", "stock": 1545},
+                { "talla": "XXL", "stock": 1650}
+         ],
         "url": "https://www.roly.cl/media/catalog/product/cache/5bbf92fd90264cfd0d036d0d3ff79904/m/o/modelouno.jpg"
     },
     {
         "id": 11,
         "nombre": "Polera Naranja",
         "color": "Naranja",
-       "precio": 15990,
+        "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 310 },
+                { "talla": "S", "stock": 210 },
+                { "talla": "M", "stock": 100 },
+                { "talla": "L", "stock": 187},
+                { "talla": "XL", "stock": 150},
+                { "talla": "XXL", "stock": 145},
+                { "talla": "XXL", "stock": 150}
+         ],
         "url": "https://sumey.cl/wp-content/uploads/2025/01/NARANJO.jpg"
     },
     {
@@ -82,13 +181,31 @@
         "nombre": "Polera Azul",
         "color": "Azul",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 3610 },
+                { "talla": "S", "stock": 1200 },
+                { "talla": "M", "stock": 1007 },
+                { "talla": "L", "stock": 1877},
+                { "talla": "XL", "stock": 1510},
+                { "talla": "XXL", "stock": 1415},
+                { "talla": "XXL", "stock": 1530}
+         ],
         "url": "https://fashionspark.com/cdn/shop/files/p-950372001-2_2048x2048.jpg?v=1756391142"
     },
      {
         "id": 13,
         "nombre": "Polera Crema Las Vegas",
         "color": "Crema",
-       "precio": 15990,
+        "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 11 },
+                { "talla": "S", "stock": 94 },
+                { "talla": "M", "stock": 64 },
+                { "talla": "L", "stock": 25},
+                { "talla": "XL", "stock": 11},
+                { "talla": "XXL", "stock": 15},
+                { "talla": "XXL", "stock": 64}
+         ],
         "url": "https://reserved.cl/cdn/shop/files/FOTOS_RESERVEDcopia_40077f67-abf2-4e2f-ac0f-5849b682d72f.jpg?v=1770136463&width=600"   
      },
        {
@@ -96,6 +213,15 @@
         "nombre": "Polera Off-White ",
         "color": "Rojo",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 1881 },
+                { "talla": "S", "stock": 954 },
+                { "talla": "M", "stock": 364 },
+                { "talla": "L", "stock": 205},
+                { "talla": "XL", "stock": 1160},
+                { "talla": "XXL", "stock": 1155},
+                { "talla": "XXL", "stock": 364}
+         ],
         "url": "https://reserved.cl/cdn/shop/files/httpswww.google.comurlsa_i_url_https_3A_2F_2Fwww.harrods.com_2Fen-gb_2Fshopping_2Foff-white-mona-lisa-hoodie-17678634_psig_AOvVaw3DkrMbTm7FCFQtn2XHQ9oR_ust_1708888420482000_source_ima_4955bfb8-ffbb-4f99-bbfc-8a765f29750b.png?v=1756420353&width=600"   
      },
       {
@@ -103,6 +229,15 @@
         "nombre": "Polera Blanca",
         "color": "Blanca",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 181 },
+                { "talla": "S", "stock": 1954 },
+                { "talla": "M", "stock": 1364 },
+                { "talla": "L", "stock": 2050},
+                { "talla": "XL", "stock": 11603},
+                { "talla": "XXL", "stock": 11552},
+                { "talla": "XXL", "stock": 3642}
+         ],
         "url": "https://aiconcept.cl/cdn/shop/files/polera_100_algodon_11.png?v=1723137530"   
      },
       {
@@ -110,13 +245,31 @@
         "nombre": "Polera Estoy Bien",
         "color": "Negra",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 18 },
+                { "talla": "S", "stock": 19 },
+                { "talla": "M", "stock": 13 },
+                { "talla": "L", "stock": 50},
+                { "talla": "XL", "stock": 116},
+                { "talla": "XXL", "stock": 112},
+                { "talla": "XXL", "stock": 342}
+         ],
         "url": "https://mokingskills.com/cdn/shop/files/Polera-oficial-estoy-bien-logo-negra-front.png?v=1755822092&width=990"   
      },
       {
         "id": 17,
         "nombre": "Polera Resident Evil",
         "color": "Negra",
-       "precio": 15990,
+        "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 918 },
+                { "talla": "S", "stock": 719 },
+                { "talla": "M", "stock": 193 },
+                { "talla": "L", "stock": 500},
+                { "talla": "XL", "stock": 1916},
+                { "talla": "XXL", "stock": 2112},
+                { "talla": "XXL", "stock": 3420}
+         ],
         "url": "https://cycorecords.cl/cdn/shop/files/p-sk27082027-1-b6d052a8-fded-48b2-995f-ba4c20aac003.jpg?v=1725378833&width=1000"   
      },
       {
@@ -124,6 +277,15 @@
         "nombre": "Polera Superman",
         "color": "Azul",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 98 },
+                { "talla": "S", "stock": 79 },
+                { "talla": "M", "stock": 93 },
+                { "talla": "L", "stock": 50},
+                { "talla": "XL", "stock": 96},
+                { "talla": "XXL", "stock": 212},
+                { "talla": "XXL", "stock": 320}
+         ],
         "url": "https://http2.mlstatic.com/D_NQ_NP_2X_838508-MLC97329232767_112025-F-polera-superman-color-gustore.webp"   
      },
       {
@@ -131,36 +293,90 @@
         "nombre": "Polera The Flash",
         "color": "Rojo",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 298 },
+                { "talla": "S", "stock": 379 },
+                { "talla": "M", "stock": 193 },
+                { "talla": "L", "stock": 432},
+                { "talla": "XL", "stock": 400},
+                { "talla": "XXL", "stock": 600},
+                { "talla": "XXL", "stock": 1200}
+         ],
         "url": "https://http2.mlstatic.com/D_NQ_NP_2X_743382-MLC83870339856_042025-F-poleras-flash-serie-the-flash-logo-hombre-grafimax.webp"   
      }, {
         "id": 20,
         "nombre": "Polera Wolverine",
         "color": "Negra",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 28 },
+                { "talla": "S", "stock": 39 },
+                { "talla": "M", "stock": 19 },
+                { "talla": "L", "stock": 32},
+                { "talla": "XL", "stock": 40},
+                { "talla": "XXL", "stock": 60},
+                { "talla": "XXL", "stock": 10}
+         ],
         "url": "https://www.discoreal.cl/cdn/shop/files/PostPolerasRetro_peliculas_series_51_1024x1024@2x.png?v=1726604484"   
      }, {
         "id": 21,
         "nombre": "Polera Magneto",
         "color": "Negra",
-       "precio": 15990,
+        "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 228 },
+                { "talla": "S", "stock": 339 },
+                { "talla": "M", "stock": 119 },
+                { "talla": "L", "stock": 332},
+                { "talla": "XL", "stock": 440},
+                { "talla": "XXL", "stock": 660},
+                { "talla": "XXL", "stock": 110}
+         ],
         "url": "https://cdnx.jumpseller.com/estampados-bettoskys/image/29747962/resize/640/640?1669410935"   
      }, {
         "id": 22,
         "nombre": "Polera X-MEN",
         "color": "Blanca",
         "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 828 },
+                { "talla": "S", "stock": 939 },
+                { "talla": "M", "stock": 919 },
+                { "talla": "L", "stock": 232},
+                { "talla": "XL", "stock": 540},
+                { "talla": "XXL", "stock": 860},
+                { "talla": "XXL", "stock": 310}
+         ],
         "url": "https://goetia.cl/cdn/shop/files/3_5d21e578-e899-4347-949e-82728299789c.webp?v=1739408662&width=810"   
      }, {
         "id": 23,
         "nombre": "Polera Cyclope",
         "color": "Rojo",
-    "precio": 15990,
+        "precio": 15990,
+        "poleras": [
+                { "talla": "XS", "stock": 428 },
+                { "talla": "S", "stock": 439 },
+                { "talla": "M", "stock": 419 },
+                { "talla": "L", "stock": 132},
+                { "talla": "XL", "stock": 340},
+                { "talla": "XXL", "stock": 460},
+                { "talla": "XXL", "stock": 210}
+         ],
         "url": "https://www.mandragorastore.com/wp-content/uploads/2020/06/Cine-Camiseta-C%C3%ADclope-de-X-Men.jpg"   
      }, {
         "id": 24,
         "nombre": "Polera Advengers",
         "color": "Negra",
-      "precio": 15990,
+        "precio": 15990,
+                "poleras": [
+                { "talla": "XS", "stock": 4028 },
+                { "talla": "S", "stock": 4399 },
+                { "talla": "M", "stock": 4190 },
+                { "talla": "L", "stock": 1320},
+                { "talla": "XL", "stock": 3400},
+                { "talla": "XXL", "stock": 4600},
+                { "talla": "XXL", "stock": 2100}
+         ],
         "url": "https://cdnx.jumpseller.com/tienda-amarilla/image/20046444/resize/900/900?1636322897"   
      }
 ]
