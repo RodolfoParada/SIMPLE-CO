@@ -29,15 +29,73 @@ export const Views = {
         ${paginationHTML}
     `,
 
-    carrito: (carrito) => `
-        <h2>Carrito</h2>
-        ${carrito.length === 0 
-            ? "<p>No hay productos en el carrito</p>"
-            : carrito.map(p => `
-                <div class="border p-2 mb-2">
-                    ${p.nombre} - $${p.precio.toLocaleString('es-CL')}
+
+carrito: (carrito) => {
+
+    if (carrito.length === 0) {
+        return `
+            <h2 class="mb-4">Carrito</h2>
+            <p>No hay productos en el carrito</p>
+        `;
+    }
+
+    const carritoCompleto = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+    const totalGeneral = carritoCompleto.reduce((acc, p) => {
+        return acc + (p.precio * p.cantidad);
+    }, 0);
+
+    return `
+        <h2 class="mb-4">Carrito</h2>
+
+        <div class="row">
+
+            ${carrito.map((p) => `
+                <div class="col-md-4 mb-4">
+
+                    <div class="card h-100 shadow-sm position-relative">
+
+                        <button 
+                            class="btn btn-sm btn-danger btn-eliminar position-absolute top-0 end-0 m-2"
+                            data-id="${p.id}"
+                            data-talla="${p.talla}">
+                            🗑
+                        </button>
+
+                        <img src="${p.url}" 
+                             class="card-img-top p-3"
+                             style="height:180px; object-fit:contain;"
+                             alt="${p.nombre}">
+
+                        <div class="card-body text-center">
+
+                            <h6 class="card-title">${p.nombre}</h6>
+
+                            <p class="mb-1">Talla: ${p.talla}</p>
+                            <p class="mb-1">Cantidad: ${p.cantidad}</p>
+                            <p class="mb-1">
+                                $${p.precio.toLocaleString('es-CL')}
+                            </p>
+
+                            <strong>
+                                $${(p.precio * p.cantidad).toLocaleString('es-CL')}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
                 </div>
-            `).join("")
-        }
-    `
+            `).join("")}
+
+        </div>
+
+        <hr>
+
+        <h4 class="text-end">
+            Total: $${totalGeneral.toLocaleString('es-CL')}
+        </h4>
+    `;
+}
+
 };

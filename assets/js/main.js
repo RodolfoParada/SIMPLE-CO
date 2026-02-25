@@ -15,18 +15,17 @@ const iniciarApp = async () => {
 
     const res = await fetch('./data/productos.json');
     productosData = await res.json();
-
-    const rutas = {
-        "/": () => renderCatalogo(),
-        "/carrito": () => Views.carrito(carrito)
-    };
-
+const rutas = {
+    "/": () => renderCatalogo(),
+    "/carrito": () => renderCarrito()
+};
     const miRouter = new Router(rutas, "view-container");
    
 
   document.addEventListener("vistaCargada", () => {
     asignarEventosCompra();
     activarImagenClick();
+    asignarEventosEliminar()
     if (pagination) {
         pagination.attachEvents();
     }
@@ -75,6 +74,58 @@ function activarImagenClick() {
         };
     });
 }
+
+function renderCarrito() {
+
+    const paginaGuardada = localStorage.getItem("paginaCarrito");
+
+    pagination = new Pagination({
+        totalItems: carrito.length,
+        itemsPerPage: 6,
+        currentPage: paginaGuardada ? parseInt(paginaGuardada) : 1,
+        onPageChange: (newPage) => {
+
+            localStorage.setItem("paginaCarrito", newPage);
+            pagination.currentPage = newPage;
+
+            const carritoPagina = pagination.paginate(carrito);
+
+            document.getElementById("view-container").innerHTML =
+                Views.carrito(carritoPagina) +
+                pagination.render();
+
+            asignarEventosEliminar();
+            pagination.attachEvents();
+        }
+    });
+
+    const carritoPagina = pagination.paginate(carrito);
+
+    return Views.carrito(carritoPagina) + pagination.render();
+}
+
+function asignarEventosEliminar() {
+
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+
+        btn.onclick = (e) => {
+
+            const id = e.target.dataset.id;
+            const talla = e.target.dataset.talla;
+
+            carrito = carrito.filter(p => 
+                !(p.id == id && p.talla == talla)
+            );
+
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+
+            // 🔥 RE-NAVEGAR correctamente
+            window.location.hash = "#/carrito";
+        };
+
+    });
+}
+
 function asignarEventosCompra() {
    document.querySelectorAll('.btn-add').forEach(btn => {
        btn.onclick = (e) => {
