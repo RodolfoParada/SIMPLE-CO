@@ -16,42 +16,59 @@ export class Pagination {
         return Math.ceil(this.totalItems / this.itemsPerPage);
     }
 
-    paginate(items) {
+    paginate(data) {
         const start = (this.currentPage - 1) * this.itemsPerPage;
         const end = start + this.itemsPerPage;
-        return items.slice(start, end);
+        return data.slice(start, end);
     }
 
     render() {
-        if (this.totalPages <= 1) return "";
-
         return `
-            <div class="d-flex justify-content-center mt-5 gap-2">
-                ${Array.from({ length: this.totalPages }, (_, i) => `
-                    <button 
-                        class="btn ${this.currentPage === i + 1 ? 'btn-dark' : 'btn-outline-dark'} btn-page"
-                        data-page="${i + 1}">
-                        ${i + 1}
-                    </button>
-                `).join("")}
+            <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
+
+                <button 
+                    class="btn btn-outline-dark  btn-prev"
+                    ${this.currentPage === 1 ? "disabled" : ""}
+                >
+                    ←
+                </button>
+
+                <span class="fw-bold">
+                    Página ${this.currentPage} de ${this.totalPages}
+                </span>
+
+                <button 
+                    class="btn btn-outline-dark btn-next"
+                    ${this.currentPage === this.totalPages ? "disabled" : ""}
+                >
+                    →
+                </button>
+
             </div>
         `;
     }
 
-    
-
     attachEvents() {
-        document.querySelectorAll('.btn-page').forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                const page = parseInt(e.target.dataset.page);
-                this.currentPage = page;
 
-                if (this.onPageChange) {
-                    this.onPageChange(page);
+        const prevBtn = document.querySelector(".btn-prev");
+        const nextBtn = document.querySelector(".btn-next");
+
+        if (prevBtn) {
+            prevBtn.onclick = () => {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    this.onPageChange(this.currentPage);
                 }
-            });
-        });
-    }
+            };
+        }
 
-  
+        if (nextBtn) {
+            nextBtn.onclick = () => {
+                if (this.currentPage < this.totalPages) {
+                    this.currentPage++;
+                    this.onPageChange(this.currentPage);
+                }
+            };
+        }
+    }
 }

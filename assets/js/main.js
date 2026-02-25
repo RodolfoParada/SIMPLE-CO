@@ -78,10 +78,6 @@ function aplicarModoGuardado() {
     }
 }
 
-
-
-
-
 function iniciarModoOscuro() {
 
     const toggleBtn = document.getElementById("toggle-dark");
