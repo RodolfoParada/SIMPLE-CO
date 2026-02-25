@@ -32,16 +32,14 @@ export const Views = {
 
 carrito: (carrito) => {
 
-    if (carrito.length === 0) {
+    if (!carrito || carrito.length === 0) {
         return `
             <h2 class="mb-4">Carrito</h2>
             <p>No hay productos en el carrito</p>
         `;
     }
 
-    const carritoCompleto = JSON.parse(localStorage.getItem("carrito") || "[]");
-
-    const totalGeneral = carritoCompleto.reduce((acc, p) => {
+    const totalGeneral = carrito.reduce((acc, p) => {
         return acc + (p.precio * p.cantidad);
     }, 0);
 
@@ -49,10 +47,8 @@ carrito: (carrito) => {
         <h2 class="mb-4">Carrito</h2>
 
         <div class="row">
-
-            ${carrito.map((p) => `
+            ${carrito.map(p => `
                 <div class="col-md-4 mb-4">
-
                     <div class="card h-100 shadow-sm position-relative">
 
                         <button 
@@ -68,26 +64,18 @@ carrito: (carrito) => {
                              alt="${p.nombre}">
 
                         <div class="card-body text-center">
-
-                            <h6 class="card-title">${p.nombre}</h6>
-
-                            <p class="mb-1">Talla: ${p.talla}</p>
-                            <p class="mb-1">Cantidad: ${p.cantidad}</p>
-                            <p class="mb-1">
-                                $${p.precio.toLocaleString('es-CL')}
-                            </p>
-
+                            <h6>${p.nombre}</h6>
+                            <p>Talla: ${p.talla ?? '-'}</p>
+                            <p>Cantidad: ${p.cantidad}</p>
+                            <p>$${p.precio.toLocaleString('es-CL')}</p>
                             <strong>
                                 $${(p.precio * p.cantidad).toLocaleString('es-CL')}
                             </strong>
-
                         </div>
 
                     </div>
-
                 </div>
             `).join("")}
-
         </div>
 
         <hr>

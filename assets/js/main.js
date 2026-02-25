@@ -7,6 +7,7 @@ import { ImagenClick } from './components/ImagenClick.js';
 let productosData = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let pagination;
+let miRouter;
 
 const iniciarApp = async () => {
 
@@ -15,40 +16,24 @@ const iniciarApp = async () => {
 
     const res = await fetch('./data/productos.json');
     productosData = await res.json();
-const rutas = {
+ 
+     const rutas = {
     "/": () => renderCatalogo(),
     "/carrito": () => renderCarrito()
 };
-    const miRouter = new Router(rutas, "view-container");
+     miRouter = new Router(rutas, "view-container");
    
+    asignarEventosEliminar();
 
   document.addEventListener("vistaCargada", () => {
     asignarEventosCompra();
     activarImagenClick();
-    asignarEventosEliminar()
     if (pagination) {
         pagination.attachEvents();
     }
 });
 
 miRouter.iniciar();
-
-// document.getElementById("view-container").addEventListener("click", (e) => {
-
-//     const btn = e.target.closest(".btn-eliminar");
-//     if (!btn) return;
-
-//     const id = btn.dataset.id;
-//     const talla = btn.dataset.talla;
-
-//     carrito = carrito.filter(p =>
-//         !(String(p.id) === String(id) && String(p.talla) === String(talla))
-//     );
-
-//     localStorage.setItem("carrito", JSON.stringify(carrito));
-
-//     miRouter.navegar("/carrito"); // ✅ método correcto
-// });
 };
 
 function renderCatalogo() {
@@ -94,12 +79,30 @@ function activarImagenClick() {
 
 function renderCarrito() {
 
-    const paginaGuardada = localStorage.getItem("paginaCarrito");
+    // 🔥 Siempre sincronizar
+    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    const itemsPorPagina = 6;
+    const totalPaginas = Math.ceil(carrito.length / itemsPorPagina);
+
+    let paginaGuardada = parseInt(localStorage.getItem("paginaCarrito")) || 1;
+
+    // 🔥 Si carrito está vacío, limpiar paginación
+    if (carrito.length === 0) {
+        localStorage.removeItem("paginaCarrito");
+        return Views.carrito([]);
+    }
+
+    // 🔥 Si la página guardada es inválida, corregir
+    if (paginaGuardada > totalPaginas) {
+        paginaGuardada = totalPaginas;
+        localStorage.setItem("paginaCarrito", paginaGuardada);
+    }
 
     pagination = new Pagination({
         totalItems: carrito.length,
-        itemsPerPage: 6,
-        currentPage: paginaGuardada ? parseInt(paginaGuardada) : 1,
+        itemsPerPage: itemsPorPagina,
+        currentPage: paginaGuardada,
         onPageChange: (newPage) => {
 
             localStorage.setItem("paginaCarrito", newPage);
@@ -111,7 +114,6 @@ function renderCarrito() {
                 Views.carrito(carritoPagina) +
                 pagination.render();
 
-            asignarEventosEliminar();
             pagination.attachEvents();
         }
     });
@@ -123,25 +125,38 @@ function renderCarrito() {
 
 function asignarEventosEliminar() {
 
-    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+    const container = document.getElementById("view-container");
+    if (!container) return;
 
-        btn.onclick = (e) => {
+    container.addEventListener("click", (e) => {
 
-            const id = e.target.dataset.id;
-            const talla = e.target.dataset.talla;
+        const btn = e.target.closest(".btn-eliminar");
+        if (!btn) return;
 
-            carrito = carrito.filter(p => 
-                !(p.id == id && p.talla == talla)
-            );
+        const id = btn.dataset.id;
+        const talla = btn.dataset.talla ?? null;
 
-            localStorage.setItem("carrito", JSON.stringify(carrito));
+        let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
 
-            // 🔥 RE-NAVEGAR correctamente
-            window.location.hash = "#/carrito";
-        };
+        carritoActual = carritoActual.filter(p =>
+            !(String(p.id) === String(id) &&
+              String(p.talla ?? null) === String(talla))
+        );
 
+        localStorage.setItem("carrito", JSON.stringify(carritoActual));
+
+        // 🔥 ACTUALIZAR VARIABLE GLOBAL
+        carrito = carritoActual;
+
+        // 🔥 VOLVER A RENDERIZAR DIRECTAMENTE
+        document.getElementById("view-container").innerHTML = renderCarrito();
+
+        if (pagination) {
+            pagination.attachEvents();
+        }
     });
 }
+
 
 function asignarEventosCompra() {
 
@@ -232,6 +247,10 @@ function iniciarModoOscuro() {
             ? "☀️ Modo Claro"
             : "🌙 Modo Oscuro";
     });
+
+
+
+
 }
 
 
