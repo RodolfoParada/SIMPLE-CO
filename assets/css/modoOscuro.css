@@ -1,0 +1,25 @@
+/* MODO CLARO (por defecto) */
+body {
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* MODO OSCURO */
+body.dark {
+  background-color: #121212 !important;
+  color: white !important;
+}
+
+/* Cards en modo oscuro */
+body.dark .card {
+  background-color: #1e1e1e !important;
+  color: white !important;
+}
+
+/* Botones en modo oscuro */
+body.dark .btn-dark {
+  background-color: #212529 !important; 
+  color: white !important;
+  
+}
