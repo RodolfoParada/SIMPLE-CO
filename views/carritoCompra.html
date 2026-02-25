@@ -1,0 +1,24 @@
+// views/carritoCompra.js
+export const Home = (productos) => {
+    return `
+        <section class="catalogo-container">
+            <h2>Nuestras Poleras</h2>
+            <div class="row">
+                ${productos.map(p => `
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <img src="${p.url}" class="card-img-top">
+                            <div class="card-body">
+                                <h5>${p.nombre}</h5>
+                                <p>$${p.precio.toLocaleString('es-CL')}</p>
+                                <button class="btn btn-dark" onclick="agregarAlCarrito(${p.id})">
+                                    Agregar al carro
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </section>
+    `;
+};
