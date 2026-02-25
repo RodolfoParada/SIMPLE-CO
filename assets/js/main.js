@@ -5,7 +5,7 @@ import { Modal } from './components/Modal.js';
 import { ImagenClick } from './components/ImagenClick.js';
 
 let productosData = [];
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let pagination;
 
 const iniciarApp = async () => {
@@ -22,6 +22,7 @@ const iniciarApp = async () => {
     };
 
     const miRouter = new Router(rutas, "view-container");
+   
 
   document.addEventListener("vistaCargada", () => {
     asignarEventosCompra();
@@ -31,7 +32,7 @@ const iniciarApp = async () => {
     }
 });
 
-    miRouter._render("/");
+miRouter.iniciar();
 };
 
 function renderCatalogo() {
@@ -75,14 +76,19 @@ function activarImagenClick() {
     });
 }
 function asignarEventosCompra() {
-    document.querySelectorAll('.btn-add').forEach(btn => {
-        btn.onclick = (e) => {
-            const id = e.target.dataset.id;
-            const producto = productosData.find(p => p.id == id);
-            carrito.push(producto);
-            Modal.show(`Se agregó "${producto.nombre}" al carrito.`);
-        };
-    });
+   document.querySelectorAll('.btn-add').forEach(btn => {
+       btn.onclick = (e) => {
+           const id = e.target.dataset.id;
+           const producto = productosData.find(p => p.id == id);
+
+           carrito.push(producto);
+
+           // 🔥 Guardar en localStorage
+           localStorage.setItem("carrito", JSON.stringify(carrito));
+
+           Modal.show(`Se agregó "${producto.nombre}" al carrito.`);
+       };
+   });
 }
 function aplicarModoGuardado() {
 

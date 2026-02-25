@@ -1,35 +1,48 @@
 export class Router {
 
-   constructor(rutas, containerId) {
-       this.rutas = rutas;
-       this.container = document.getElementById(containerId);
-       this._loadInitialRoute();
-   }
+  constructor(rutas, containerId) {
+      this.rutas = rutas;
+      this.container = document.getElementById(containerId);
+      this._initEvents();
+  }
 
-   navegar(path) {
-       window.history.pushState({}, "", path);
-       this._render(path);
-   }
+  navegar(path) {
+      window.location.hash = path;
+  }
 
-   _render(path) {
-       const renderVista = this.rutas[path] || this.rutas["/"];
-       this.container.innerHTML = renderVista();
+  iniciar() {
+      this._renderFromHash();
+  }
 
-       const evento = new CustomEvent("vistaCargada", { detail: { path } });
-       document.dispatchEvent(evento);
-   }
+  _getPath() {
+      return window.location.hash.slice(1) || "/";
+  }
 
-   _loadInitialRoute() {
+  _renderFromHash() {
+      this._render(this._getPath());
+  }
 
-       window.addEventListener("popstate", () => {
-           this._render(window.location.pathname);
-       });
+  _render(path) {
+      const renderVista = this.rutas[path] || this.rutas["/"];
+      this.container.innerHTML = renderVista();
 
-       document.addEventListener("click", e => {
-           if (e.target.matches("[data-link]")) {
-               e.preventDefault();
-               this.navegar(e.target.getAttribute("href"));
-           }
-       });
-   }
+      document.dispatchEvent(
+          new CustomEvent("vistaCargada", { detail: { path } })
+      );
+  }
+
+  _initEvents() {
+
+      window.addEventListener("hashchange", () => {
+          this._renderFromHash();
+      });
+
+      document.addEventListener("click", e => {
+          const link = e.target.closest("[data-link]");
+          if (!link) return;
+
+          e.preventDefault();
+          window.location.hash = link.getAttribute("href");
+      });
+  }
 }
