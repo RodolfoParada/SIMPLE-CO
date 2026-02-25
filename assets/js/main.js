@@ -8,6 +8,9 @@ let pagination;
 
 const iniciarApp = async () => {
 
+    aplicarModoGuardado();
+   iniciarModoOscuro(); 
+
     const res = await fetch('./data/productos.json');
     productosData = await res.json();
 
@@ -60,31 +63,48 @@ function asignarEventosCompra() {
     });
 }
 function aplicarModoGuardado() {
-    const modo = localStorage.getItem("modoOscuro");
 
-    if (modo === "true") {
+    const modoGuardado = localStorage.getItem("modoOscuro");
+
+    if (modoGuardado === "true") {
         document.body.classList.add("dark");
     }
 }
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
+
+
+function iniciarModoOscuro() {
 
     const toggleBtn = document.getElementById("toggle-dark");
+    if (!toggleBtn) return;
 
-    if (toggleBtn) {
-        toggleBtn.addEventListener("click", () => {
-            document.body.classList.toggle("dark");
+    // 🔹 Leer estado guardado
+    const modoGuardado = localStorage.getItem("modoOscuro");
 
-            const modoActivo = document.body.classList.contains("dark");
-
-            localStorage.setItem("modoOscuro", modoActivo);
-        });
+    if (modoGuardado === "true") {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "☀️ Modo Claro";
+    } else {
+        toggleBtn.textContent = "🌙 Modo Oscuro";
     }
 
-});
+    // 🔹 Evento click
+    toggleBtn.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark");
+
+        const modoActivo = document.body.classList.contains("dark");
+
+        localStorage.setItem("modoOscuro", modoActivo);
+
+        // Cambiar texto dinámicamente
+        toggleBtn.textContent = modoActivo
+            ? "☀️ Modo Claro"
+            : "🌙 Modo Oscuro";
+    });
+}
 
 
-aplicarModoGuardado();
 iniciarApp();
