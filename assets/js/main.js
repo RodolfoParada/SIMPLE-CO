@@ -32,6 +32,23 @@ const rutas = {
 });
 
 miRouter.iniciar();
+
+// document.getElementById("view-container").addEventListener("click", (e) => {
+
+//     const btn = e.target.closest(".btn-eliminar");
+//     if (!btn) return;
+
+//     const id = btn.dataset.id;
+//     const talla = btn.dataset.talla;
+
+//     carrito = carrito.filter(p =>
+//         !(String(p.id) === String(id) && String(p.talla) === String(talla))
+//     );
+
+//     localStorage.setItem("carrito", JSON.stringify(carrito));
+
+//     miRouter.navegar("/carrito"); // ✅ método correcto
+// });
 };
 
 function renderCatalogo() {
@@ -127,19 +144,55 @@ function asignarEventosEliminar() {
 }
 
 function asignarEventosCompra() {
-   document.querySelectorAll('.btn-add').forEach(btn => {
-       btn.onclick = (e) => {
-           const id = e.target.dataset.id;
-           const producto = productosData.find(p => p.id == id);
 
-           carrito.push(producto);
+    document.querySelectorAll('.btn-add').forEach(btn => {
 
-           // 🔥 Guardar en localStorage
-           localStorage.setItem("carrito", JSON.stringify(carrito));
+        btn.onclick = (e) => {
 
-           Modal.show(`Se agregó "${producto.nombre}" al carrito.`);
-       };
-   });
+            const id = e.currentTarget.dataset.id;
+
+            // 🔥 Siempre sincronizar con localStorage
+            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+
+            const producto = productosData.find(p => 
+                String(p.id) === String(id)
+            );
+
+            if (!producto) return;
+
+            // 🔹 Si usas talla (opcional)
+            const select = document.querySelector(`.talla-select[data-id="${id}"]`);
+            const talla = select ? select.value : null;
+
+            // 🔥 Validar si ya existe (id + talla)
+            const yaExiste = carritoActual.some(p =>
+                String(p.id) === String(id) &&
+                String(p.talla ?? null) === String(talla)
+            );
+
+            if (yaExiste) {
+                Modal.show("⚠️ Esta polera ya está en el carrito.");
+                return;
+            }
+
+            // 🔥 Crear objeto limpio
+            const nuevoItem = {
+                id: producto.id,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                url: producto.url,
+                talla: talla,
+                cantidad: 1
+            };
+
+            carritoActual.push(nuevoItem);
+
+            localStorage.setItem("carrito", JSON.stringify(carritoActual));
+
+            Modal.show(`✅ "${producto.nombre}" agregada al carrito.`);
+        };
+
+    });
 }
 function aplicarModoGuardado() {
 
