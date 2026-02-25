@@ -59,5 +59,32 @@ function asignarEventosCompra() {
         };
     });
 }
+function aplicarModoGuardado() {
+    const modo = localStorage.getItem("modoOscuro");
 
+    if (modo === "true") {
+        document.body.classList.add("dark");
+    }
+}
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const toggleBtn = document.getElementById("toggle-dark");
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+
+            const modoActivo = document.body.classList.contains("dark");
+
+            localStorage.setItem("modoOscuro", modoActivo);
+        });
+    }
+
+});
+
+
+aplicarModoGuardado();
 iniciarApp();
