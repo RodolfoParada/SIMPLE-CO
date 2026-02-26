@@ -248,7 +248,77 @@ function iniciarModoOscuro() {
             : "🌙 Modo Oscuro";
     });
 
+// Dentro de main.js, añade este listener para capturar los clics en el contenedor del carrito
+document.addEventListener("vistaCargada", (e) => {
+    if (e.detail.path === "/carrito") {
+        asignarEventosCarritoDinamico();
+    }
+});
 
+function asignarEventosCarritoDinamico() {
+    const container = document.getElementById("view-container");
+
+    container.addEventListener("click", (e) => {
+        // --- LÓGICA AGREGAR TALLA ---
+        if (e.target.closest(".btn-confirmar-talla")) {
+            const btn = e.target.closest(".btn-confirmar-talla");
+            const id = btn.dataset.id;
+            const selectTalla = container.querySelector(`.select-talla-dinamica[data-id="${id}"]`);
+            const inputCant = container.querySelector(`.input-cantidad-dinamica[data-id="${id}"]`);
+            
+            const talla = selectTalla.value;
+            const cantidad = parseInt(inputCant.value);
+
+            if (!talla) {
+                Modal.show("⚠️ Por favor, selecciona una talla.");
+                return;
+            }
+
+            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+
+            // Validar si la talla ya existe para este producto [cite: 387, 391]
+            const existeTalla = carritoActual.some(p => String(p.id) === String(id) && p.talla === talla);
+
+            if (existeTalla) {
+                Modal.show(`⚠️ La talla ${talla} ya está en el listado.`);
+                return;
+            }
+
+            // Buscar datos originales del producto para completar el objeto [cite: 379]
+            const productoOriginal = productosData.find(p => String(p.id) === String(id));
+
+            const nuevoItem = {
+                ...productoOriginal,
+                talla: talla,
+                cantidad: cantidad
+            };
+
+            // Si el producto estaba en el carrito sin talla (recién agregado), lo reemplazamos o filtramos
+            carritoActual = carritoActual.filter(p => !(String(p.id) === String(id) && p.talla === null));
+            
+            carritoActual.push(nuevoItem);
+            localStorage.setItem("carrito", JSON.stringify(carritoActual));
+            
+            // Re-renderizar la vista del carrito [cite: 367]
+            container.innerHTML = renderCarrito();
+        }
+
+        // --- LÓGICA ELIMINAR TALLA ESPECÍFICA ---
+        if (e.target.closest(".btn-eliminar-talla")) {
+            const btn = e.target.closest(".btn-eliminar-talla");
+            const id = btn.dataset.id;
+            const talla = btn.dataset.talla;
+
+            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+            
+            // Filtramos para eliminar solo el par ID+Talla exacto [cite: 359, 360]
+            carritoActual = carritoActual.filter(p => !(String(p.id) === String(id) && String(p.talla) === String(talla)));
+
+            localStorage.setItem("carrito", JSON.stringify(carritoActual));
+            container.innerHTML = renderCarrito();
+        }
+    });
+}
 
 
 }
