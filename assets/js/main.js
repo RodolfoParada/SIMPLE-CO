@@ -257,65 +257,90 @@ document.addEventListener("vistaCargada", (e) => {
 
 function asignarEventosCarritoDinamico() {
     const container = document.getElementById("view-container");
+    if (!container) return; 
 
-    container.addEventListener("click", (e) => {
+    container.addEventListener("click", (e) => { 
         // --- LÓGICA AGREGAR TALLA ---
-        if (e.target.closest(".btn-confirmar-talla")) {
-            const btn = e.target.closest(".btn-confirmar-talla");
-            const id = btn.dataset.id;
-            const selectTalla = container.querySelector(`.select-talla-dinamica[data-id="${id}"]`);
-            const inputCant = container.querySelector(`.input-cantidad-dinamica[data-id="${id}"]`);
+        const btnConfirmar = e.target.closest(".btn-confirmar-talla"); 
+        if (btnConfirmar) {
+            const id = btnConfirmar.dataset.id; 
+            const selectTalla = container.querySelector(`.select-talla-dinamica[data-id="${id}"]`); 
+            const inputCant = container.querySelector(`.input-cantidad-dinamica[data-id="${id}"]`); 
             
-            const talla = selectTalla.value;
-            const cantidad = parseInt(inputCant.value);
+            const talla = selectTalla ? selectTalla.value : null; 
+            const cantidad = inputCant ? parseInt(inputCant.value) : 1; 
 
             if (!talla) {
                 Modal.show("⚠️ Por favor, selecciona una talla.");
                 return;
             }
 
-            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || []; 
 
             // Validar si la talla ya existe para este producto [cite: 387, 391]
-            const existeTalla = carritoActual.some(p => String(p.id) === String(id) && p.talla === talla);
+            const existeTalla = carritoActual.some(p => 
+                String(p.id) === String(id) && String(p.talla) === String(talla) 
+            );
 
             if (existeTalla) {
-                Modal.show(`⚠️ La talla ${talla} ya está en el listado.`);
+                Modal.show(`⚠️ La talla ${talla} ya está en el listado.`); 
                 return;
             }
 
-            // Buscar datos originales del producto para completar el objeto [cite: 379]
-            const productoOriginal = productosData.find(p => String(p.id) === String(id));
+            // Buscar datos originales del producto [cite: 379]
+            const productoOriginal = productosData.find(p => String(p.id) === String(id)); 
+            if (!productoOriginal) return;
 
             const nuevoItem = {
-                ...productoOriginal,
+                id: productoOriginal.id, 
+                nombre: productoOriginal.nombre, 
+                precio: productoOriginal.precio, 
+                url: productoOriginal.url, 
                 talla: talla,
-                cantidad: cantidad
-            };
+                cantidad: cantidad 
+            }
 
-            // Si el producto estaba en el carrito sin talla (recién agregado), lo reemplazamos o filtramos
-            carritoActual = carritoActual.filter(p => !(String(p.id) === String(id) && p.talla === null));
+            // --- LÓGICA PARA MANTENER LA POSICIÓN ---
+            // Buscamos el primer elemento que coincida con este ID (para saber dónde está la tarjeta)
+            const indiceOriginal = carritoActual.findIndex(p => String(p.id) === String(id));
+
+            if (indiceOriginal !== -1) {
+                // Si el item encontrado no tiene talla (fue agregado vacío del catálogo), lo reemplazamos
+                if (carritoActual[indiceOriginal].talla === null) {
+                    carritoActual[indiceOriginal] = nuevoItem;
+                } else {
+                    // Si ya tiene tallas, insertamos la nueva después de la última talla de ese mismo ID
+                    const ultimoIndiceMismoID = carritoActual.findLastIndex(p => String(p.id) === String(id));
+                    carritoActual.splice(ultimoIndiceMismoID + 1, 0, nuevoItem);
+                }
+            } else {
+                // Caso improbable en esta vista, pero por seguridad:
+                carritoActual.push(nuevoItem); 
+            }
+
+            localStorage.setItem("carrito", JSON.stringify(carritoActual)); 
             
-            carritoActual.push(nuevoItem);
-            localStorage.setItem("carrito", JSON.stringify(carritoActual));
-            
-            // Re-renderizar la vista del carrito [cite: 367]
-            container.innerHTML = renderCarrito();
+            // Actualizar vista manteniendo la posición visual [cite: 367]
+            container.innerHTML = renderCarrito(); 
+            if (pagination) pagination.attachEvents(); 
         }
 
         // --- LÓGICA ELIMINAR TALLA ESPECÍFICA ---
-        if (e.target.closest(".btn-eliminar-talla")) {
-            const btn = e.target.closest(".btn-eliminar-talla");
-            const id = btn.dataset.id;
-            const talla = btn.dataset.talla;
+        const btnEliminarTalla = e.target.closest(".btn-eliminar-talla"); 
+        if (btnEliminarTalla) {
+            const id = btnEliminarTalla.dataset.id; 
+            const talla = btnEliminarTalla.dataset.talla; 
 
-            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || []; 
             
-            // Filtramos para eliminar solo el par ID+Talla exacto [cite: 359, 360]
-            carritoActual = carritoActual.filter(p => !(String(p.id) === String(id) && String(p.talla) === String(talla)));
+            // Filtramos para eliminar solo el par ID+Talla exacto [cite: 359, 360, 361]
+            carritoActual = carritoActual.filter(p => 
+                !(String(p.id) === String(id) && String(p.talla) === String(talla))
+            );
 
-            localStorage.setItem("carrito", JSON.stringify(carritoActual));
-            container.innerHTML = renderCarrito();
+            localStorage.setItem("carrito", JSON.stringify(carritoActual)); 
+            container.innerHTML = renderCarrito(); 
+            if (pagination) pagination.attachEvents(); 
         }
     });
 }

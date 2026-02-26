@@ -24,6 +24,7 @@ export const Views = {
         <div class="mt-5">${paginationHTML}</div>
     `,
 
+// views.js
 carrito: (carrito) => {
     if (!carrito || carrito.length === 0) {
         return `
@@ -35,7 +36,6 @@ carrito: (carrito) => {
         `;
     }
 
-    // Agrupamos por ID para mostrar una sola card por modelo de polera
     const productosUnicos = [...new Map(carrito.map(item => [item.id, item])).values()];
     const totalGeneral = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
 
@@ -43,13 +43,17 @@ carrito: (carrito) => {
         <h2 class="mb-4 fw-bold">Gestión de Pedido</h2>
         <div class="row">
             <div class="col-lg-8">
+            
                 ${productosUnicos.map(p => {
-                    // Obtenemos todas las tallas ya agregadas para este ID
-                    const tallasAgregadas = carrito.filter(item => item.id === p.id && item.talla !== null);
+                    // Filtramos todas las tallas que pertenecen a este modelo específico [cite: 523]
+                    const tallasAgregadas = carrito.filter(item => item.id === p.id);
                     
+                    // Cálculo del subtotal por polera (suma de todas sus tallas)
+                    const subtotalPorPolera = tallasAgregadas.reduce((acc, t) => acc + (t.precio * t.cantidad), 0);
+
                     return `
-                    <div class="card mb-4 shadow-sm border-0">
-                      <button 
+                    <div class="card mb-4 shadow-sm border-0 position-relative">
+                          <button 
                             class="btn btn-sm btn-danger btn-eliminar position-absolute top-0 end-0 m-2"
                             data-id="${p.id}"
                             data-talla="${p.talla}">
@@ -61,7 +65,10 @@ carrito: (carrito) => {
                             </div>
                             <div class="col-md-9">
                                 <div class="card-body">
-                                    <h5 class="fw-bold">${p.nombre}</h5>
+                                    <div class="d-flex justify-content-between align-items-start">
+                                    
+                                        <h5 class="fw-bold">${p.nombre}</h5>
+                                    </div>
                                     <p class="text-muted small">Precio Unitario: $${p.precio.toLocaleString('es-CL')}</p>
                                     
                                     <div class="row g-2 align-items-end border p-3 rounded bg-white mb-3">
@@ -89,12 +96,12 @@ carrito: (carrito) => {
                                         </div>
                                     </div>
 
-                                    <div class="listado-tallas-agregadas">
+                                    <div class="listado-tallas-agregadas" id="listado-${p.id}">
                                         ${tallasAgregadas.length > 0 ? `
-                                            <div class="row g-0 py-2 border-bottom fw-bold small text-muted">
+                                            <div class="row g-0 py-1 border-bottom fw-bold small text-muted">
                                                 <div class="col-3">Talla</div>
-                                                <div class="col-3 text-center">Unidades</div>
-                                                <div class="col-4 text-end">Subtotal</div>
+                                                <div class="col-3 text-center">Cant.</div>
+                                                <div class="col-4 text-end">Total Talla</div>
                                                 <div class="col-2 text-end"></div>
                                             </div>
                                         ` : ''}
@@ -112,6 +119,11 @@ carrito: (carrito) => {
                                                 </div>
                                             </div>
                                         `).join("")}
+                                        
+                                    </div>
+                                    <div class="text-end">
+                                            <span class="small text-muted d-block">Subtotal Polera</span>
+                                            <span class="fw-bold text-dark">$${subtotalPorPolera.toLocaleString('es-CL')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -124,10 +136,10 @@ carrito: (carrito) => {
             <div class="col-lg-4">
                 <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
                     <div class="card-body p-4 text-center">
-                        <h4 class="mb-4 fw-bold">TOTAL A PAGAR</h4>
+                        <h4 class="mb-4 fw-bold">RESUMEN DE COMPRA</h4>
                         <hr>
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <span class="text-muted">Total:</span>
+                            <span class="text-muted">Total a Pagar:</span>
                             <span class="h3 mb-0 text-primary fw-bold">$${totalGeneral.toLocaleString('es-CL')}</span>
                         </div>
                         <button class="btn btn-primary btn-lg w-100 fw-bold rounded-pill shadow-sm">
