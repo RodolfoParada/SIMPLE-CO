@@ -82,7 +82,7 @@ function renderCarrito() {
     // Siempre sincronizar
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    const itemsPorPagina = 6;
+    const itemsPorPagina = 3;
     const totalPaginas = Math.ceil(carrito.length / itemsPorPagina);
 
     let paginaGuardada = parseInt(localStorage.getItem("paginaCarrito")) || 1;
@@ -327,42 +327,59 @@ function asignarEventosCarritoDinamico() {
         }
 
         // --- LÓGICA ELIMINAR TALLA ESPECÍFICA ---
-     const btnEliminarTalla = e.target.closest(".btn-eliminar-talla");
+     // --- LÓGICA ELIMINAR TALLA ESPECÍFICA ---
+
+const btnEliminarTalla = e.target.closest(".btn-eliminar-talla");
 
 if (btnEliminarTalla) {
-    const id = btnEliminarTalla.dataset.id;
-    const talla = btnEliminarTalla.dataset.talla;
 
-    let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+   const id = btnEliminarTalla.dataset.id;
+   const talla = btnEliminarTalla.dataset.talla;
 
-    // 1. Filtramos el carrito para excluir el ítem que coincida con ID y Talla
-    carritoActual = carritoActual.filter(p => 
-        !(String(p.id) === String(id) && String(p.talla) === String(talla))
-    );
+   Modal.confirm(
+       `¿Quieres eliminar la talla <strong>${talla}</strong>?`,
+       () => {
 
-    // 2. IMPORTANTE: Si era la última talla, debemos dejar el producto "vacío" 
-    // para que la Card no desaparezca del carrito.
-    const todaviaTieneTallas = carritoActual.some(p => String(p.id) === String(id));
-    
-    if (!todaviaTieneTallas) {
-        // Buscamos los datos básicos del producto para mantener la Card visible
-        const productoOriginal = productosData.find(p => String(p.id) === String(id));
-        if (productoOriginal) {
-            carritoActual.push({
-                ...productoOriginal,
-                talla: null, // Al ser null, Views.js mostrará solo los selectores
-                cantidad: 0
-            });
-        }
-    }
+           let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    // 3. Guardamos y refrescamos la interfaz
-    localStorage.setItem("carrito", JSON.stringify(carritoActual));
-    
-    container.innerHTML = renderCarrito();
-    if (pagination) pagination.attachEvents();
-    
-    Modal.show("Talla eliminada del listado.");
+           // 1. Eliminar solo esa talla específica
+           carritoActual = carritoActual.filter(p =>
+               !(String(p.id) === String(id) && String(p.talla) === String(talla))
+           );
+
+           // 2. Verificar si aún quedan tallas del producto
+           const todaviaTieneTallas = carritoActual.some(p =>
+               String(p.id) === String(id)
+           );
+
+           // 3. Si era la última talla, mantener la card visible
+           if (!todaviaTieneTallas) {
+
+               const productoOriginal = productosData.find(p =>
+                   String(p.id) === String(id)
+               );
+
+               if (productoOriginal) {
+                   carritoActual.push({
+                       ...productoOriginal,
+                       talla: null,
+                       cantidad: 0
+                   });
+               }
+           }
+
+           // 4. Guardar y refrescar vista
+           localStorage.setItem("carrito", JSON.stringify(carritoActual));
+
+           container.innerHTML = renderCarrito();
+           if (pagination) pagination.attachEvents();
+       },
+       {
+           confirmText: "Sí",
+           cancelText: "No",
+           title: "¿Quieres eliminar la talla?"
+       }
+   );
 }
 
 // Lógica boton editar
