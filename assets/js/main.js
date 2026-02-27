@@ -294,11 +294,6 @@ function asignarEventosCarritoDinamico() {
                 cantidad: cantidad 
             }
 
-
-       
-
-
-
             // --- LÓGICA PARA MANTENER LA POSICIÓN ---
             // Buscamos el primer elemento que coincida con este ID (para saber dónde está la tarjeta)
             const indiceOriginal = carritoActual.findIndex(p => String(p.id) === String(id));
@@ -333,23 +328,34 @@ if (btnEliminarTalla) {
 
     let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    // CAMBIO: En lugar de eliminar, reseteamos los valores de esa talla específica
-    carritoActual = carritoActual.map(p => {
-        if (String(p.id) === String(id) && String(p.talla) === String(talla)) {
-            return {
-                ...p,
-                talla: null,    // Volvemos a null para que views.js oculte los datos 
-                cantidad: 0     // Volvemos a 0 para que el subtotal sea cero [cite: 396-403]
-            };
-        }
-        return p;
-    });
+    // 1. Filtramos el carrito para excluir el ítem que coincida con ID y Talla
+    carritoActual = carritoActual.filter(p => 
+        !(String(p.id) === String(id) && String(p.talla) === String(talla))
+    );
 
+    // 2. IMPORTANTE: Si era la última talla, debemos dejar el producto "vacío" 
+    // para que la Card no desaparezca del carrito.
+    const todaviaTieneTallas = carritoActual.some(p => String(p.id) === String(id));
+    
+    if (!todaviaTieneTallas) {
+        // Buscamos los datos básicos del producto para mantener la Card visible
+        const productoOriginal = productosData.find(p => String(p.id) === String(id));
+        if (productoOriginal) {
+            carritoActual.push({
+                ...productoOriginal,
+                talla: null, // Al ser null, Views.js mostrará solo los selectores
+                cantidad: 0
+            });
+        }
+    }
+
+    // 3. Guardamos y refrescamos la interfaz
     localStorage.setItem("carrito", JSON.stringify(carritoActual));
     
-    // Renderizamos de nuevo para que aparezcan los selectores "Elegir..." [cite: 497]
     container.innerHTML = renderCarrito();
     if (pagination) pagination.attachEvents();
+    
+    Modal.show("🗑️ Talla eliminada del listado.");
 }
 
 // Lógica boton editar
