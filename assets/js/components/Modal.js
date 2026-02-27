@@ -58,41 +58,69 @@ export class Modal {
     }
 }
 
-     static confirm(message, onConfirm) {
+ static confirm(message, onConfirm) {
 
-        const existing = document.getElementById("custom-modal");
-        if (existing) existing.remove();
+    const existing = document.getElementById("custom-modal");
+    if (existing) existing.remove();
 
-        const modalHTML = `
-            <div id="custom-modal" class="custom-modal-overlay">
-                <div class="custom-modal-box">
-                    <h5>Confirmación</h5>
-                    <p>${message}</p>
+    const modalHTML = `
+        <div id="custom-modal" class="custom-modal-overlay">
 
-                    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
-                        <button class="custom-modal-btn" id="modal-cancel">
-                            Cancelar
-                        </button>
-                        <button class="custom-modal-btn" id="modal-confirm">
-                            Eliminar
-                        </button>
-                    </div>
-                    
+            <div class="custom-modal-box" style="position:relative;">
+
+                <!-- BOTÓN X -->
+                <button id="modal-close-x"
+                    style="
+                        position:absolute;
+                        top:10px;
+                        right:15px;
+                        border:none;
+                        background:none;
+                        font-size:20px;
+                        cursor:pointer;">
+                    ✕
+                </button>
+
+                <h5>Confirmación</h5>
+
+                <div class="modal-body-content">
+                    ${message}
                 </div>
+
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="custom-modal-btn" id="modal-cancel">
+                        Cancelar
+                    </button>
+
+                    <button class="custom-modal-btn" id="modal-confirm">
+                        Eliminar
+                    </button>
+                </div>
+
             </div>
-        `;
+        </div>
+    `;
 
-        document.body.insertAdjacentHTML("beforeend", modalHTML);
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
 
-        document.getElementById("modal-cancel").onclick = () => {
-            document.getElementById("custom-modal").remove();
-        };
+    const modal = document.getElementById("custom-modal");
 
-        document.getElementById("modal-confirm").onclick = () => {
-            onConfirm();
-            document.getElementById("custom-modal").remove();
-        };
-    }
+    // Cancelar
+    document.getElementById("modal-cancel").onclick = () => {
+        modal.remove();
+    };
+
+    // Confirmar
+    document.getElementById("modal-confirm").onclick = () => {
+        onConfirm();
+        modal.remove();
+    };
+
+    // ❌ Botón X
+    document.getElementById("modal-close-x").onclick = () => {
+        modal.remove();
+    };
+}
 
     
 }
