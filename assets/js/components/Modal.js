@@ -29,6 +29,6 @@ export class Modal {
         setTimeout(() => {
             const modal = document.getElementById("custom-modal");
             if (modal) modal.remove();
-        }, 10000);
+        }, 9000);
     }
 }
