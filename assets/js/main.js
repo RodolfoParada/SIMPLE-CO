@@ -82,7 +82,7 @@ function renderCarrito() {
     // Siempre sincronizar
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    const itemsPorPagina = 6;
+    const itemsPorPagina = 3;
     const totalPaginas = Math.ceil(carrito.length / itemsPorPagina);
 
     let paginaGuardada = parseInt(localStorage.getItem("paginaCarrito")) || 1;
