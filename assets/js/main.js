@@ -158,57 +158,48 @@ function asignarEventosEliminar() {
 }
 
 
+// Localiza la función asignarEventosCompra en main.js
 function asignarEventosCompra() {
-
     document.querySelectorAll('.btn-add').forEach(btn => {
-
         btn.onclick = (e) => {
-
             const id = e.currentTarget.dataset.id;
-
-            // 🔥 Siempre sincronizar con localStorage
             let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
-
-            const producto = productosData.find(p => 
-                String(p.id) === String(id)
-            );
-
+            
+            const producto = productosData.find(p => String(p.id) === String(id));
             if (!producto) return;
 
-            // 🔹 Si usas talla (opcional)
+            // Buscamos si seleccionó talla en el selector del catálogo
             const select = document.querySelector(`.talla-select[data-id="${id}"]`);
-            const talla = select ? select.value : null;
+            const tallaSeleccionada = (select && select.value !== "") ? select.value : null;
 
-            // 🔥 Validar si ya existe (id + talla)
-            const yaExiste = carritoActual.some(p =>
-                String(p.id) === String(id) &&
-                String(p.talla ?? null) === String(talla)
-            );
-
-            if (yaExiste) {
-                Modal.show("⚠️ Esta polera ya está en el carrito.");
-                return;
-            }
-
-            // 🔥 Crear objeto limpio
+            // CAMBIO CLAVE: Si no hay talla, la cantidad DEBE ser 0
             const nuevoItem = {
                 id: producto.id,
                 nombre: producto.nombre,
                 precio: producto.precio,
                 url: producto.url,
-                talla: talla,
-                cantidad: 1
+                talla: tallaSeleccionada, 
+                cantidad: tallaSeleccionada ? 1 : 0 // Cantidad 0 si la talla es null
             };
 
+            // Validar si ya existe la misma combinación id+talla
+            const yaExiste = carritoActual.some(p => 
+                String(p.id) === String(id) && String(p.talla) === String(tallaSeleccionada)
+            );
+
+            if (yaExiste) {
+                Modal.show("⚠️ Este producto ya está en el carrito.");
+                return;
+            }
+
             carritoActual.push(nuevoItem);
-
             localStorage.setItem("carrito", JSON.stringify(carritoActual));
-
             Modal.show(`✅ "${producto.nombre}" agregada al carrito.`);
         };
-
     });
 }
+
+
 function aplicarModoGuardado() {
 
     const modoGuardado = localStorage.getItem("modoOscuro");
@@ -255,6 +246,9 @@ document.addEventListener("vistaCargada", (e) => {
     }
 });
 
+
+
+
 function asignarEventosCarritoDinamico() {
     const container = document.getElementById("view-container");
     if (!container) return; 
@@ -300,6 +294,11 @@ function asignarEventosCarritoDinamico() {
                 cantidad: cantidad 
             }
 
+
+       
+
+
+
             // --- LÓGICA PARA MANTENER LA POSICIÓN ---
             // Buscamos el primer elemento que coincida con este ID (para saber dónde está la tarjeta)
             const indiceOriginal = carritoActual.findIndex(p => String(p.id) === String(id));
@@ -326,22 +325,103 @@ function asignarEventosCarritoDinamico() {
         }
 
         // --- LÓGICA ELIMINAR TALLA ESPECÍFICA ---
-        const btnEliminarTalla = e.target.closest(".btn-eliminar-talla"); 
-        if (btnEliminarTalla) {
-            const id = btnEliminarTalla.dataset.id; 
-            const talla = btnEliminarTalla.dataset.talla; 
+     const btnEliminarTalla = e.target.closest(".btn-eliminar-talla");
 
-            let carritoActual = JSON.parse(localStorage.getItem("carrito")) || []; 
-            
-            // Filtramos para eliminar solo el par ID+Talla exacto [cite: 359, 360, 361]
-            carritoActual = carritoActual.filter(p => 
-                !(String(p.id) === String(id) && String(p.talla) === String(talla))
-            );
+if (btnEliminarTalla) {
+    const id = btnEliminarTalla.dataset.id;
+    const talla = btnEliminarTalla.dataset.talla;
 
-            localStorage.setItem("carrito", JSON.stringify(carritoActual)); 
-            container.innerHTML = renderCarrito(); 
-            if (pagination) pagination.attachEvents(); 
+    let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // CAMBIO: En lugar de eliminar, reseteamos los valores de esa talla específica
+    carritoActual = carritoActual.map(p => {
+        if (String(p.id) === String(id) && String(p.talla) === String(talla)) {
+            return {
+                ...p,
+                talla: null,    // Volvemos a null para que views.js oculte los datos 
+                cantidad: 0     // Volvemos a 0 para que el subtotal sea cero [cite: 396-403]
+            };
         }
+        return p;
+    });
+
+    localStorage.setItem("carrito", JSON.stringify(carritoActual));
+    
+    // Renderizamos de nuevo para que aparezcan los selectores "Elegir..." [cite: 497]
+    container.innerHTML = renderCarrito();
+    if (pagination) pagination.attachEvents();
+}
+
+// Lógica boton editar
+// --- LÓGICA BOTÓN EDITAR (SOLUCIÓN DEFINITIVA) ---
+const btnEditar = e.target.closest(".btn-editar-talla");
+
+if (btnEditar) {
+    const id = btnEditar.dataset.id;
+    const talla = btnEditar.dataset.talla;
+
+    // 1. Obtener la data más reciente del LocalStorage [cite: 358]
+    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+    const itemActual = carritoActual.find(p => 
+        String(p.id) === String(id) && String(p.talla) === String(talla)
+    );
+
+    if (itemActual) {
+        const mensajeHtml = `
+            <p>Modificar cantidad para la talla <strong>${talla}</strong>:</p>
+            <input type="number" id="input-nueva-cant" class="form-control text-center mx-auto" 
+                   value="${itemActual.cantidad}" min="1" style="width: 100px;">
+        `;
+
+        // 2. Mostrar el modal con autoClose en false para evitar que desaparezca 
+        Modal.show(mensajeHtml, "Editar Cantidad", false);
+
+        // 3. Capturamos el botón del modal manualmente para asegurar el evento
+        const btnGuardarModal = document.getElementById("modal-close");
+        
+        if (btnGuardarModal) {
+            btnGuardarModal.onclick = (event) => {
+                event.preventDefault(); // Evitamos cualquier comportamiento por defecto
+                
+                const input = document.getElementById("input-nueva-cant");
+                const nuevaCant = parseInt(input.value);
+
+                if (!isNaN(nuevaCant) && nuevaCant > 0) {
+                    // Volvemos a leer el storage para evitar colisiones de datos
+                    let carritoData = JSON.parse(localStorage.getItem("carrito")) || [];
+
+                    // Actualizamos el registro específico [cite: 359-361]
+                    carritoData = carritoData.map(p => {
+                        if (String(p.id) === String(id) && String(p.talla) === String(talla)) {
+                            return { ...p, cantidad: nuevaCant };
+                        }
+                        return p;
+                    });
+
+                    // Guardamos y cerramos el modal [cite: 363, 183]
+                    localStorage.setItem("carrito", JSON.stringify(carritoData));
+                    document.getElementById("custom-modal").remove();
+                    
+                    // 4. Forzamos el refresco de la vista del carrito [cite: 367, 497]
+                    // Usamos la función global renderCarrito() para actualizar subtotales y resumen
+                    const viewContainer = document.getElementById("view-container");
+                    if (viewContainer) {
+                        // Llamamos directamente a la función que renderiza el carrito pasándole la data actualizada
+                        viewContainer.innerHTML = renderCarrito();
+                        
+                        // Re-vinculamos los eventos de la vista cargada [cite: 276-282, 300]
+                        if (typeof pagination !== 'undefined' && pagination.attachEvents) {
+                            pagination.attachEvents();
+                        }
+                    }
+                } else {
+                    input.style.border = "2px solid red";
+                }
+            };
+        }
+    }
+}
+
     });
 }
 
