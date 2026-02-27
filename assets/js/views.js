@@ -59,8 +59,8 @@ carrito: (carrito) => {
                         return `
                         <div class="card mb-4 shadow-sm border-0 position-relative">
                             <button class="btn btn-sm btn-danger btn-eliminar position-absolute top-0 end-0 m-2"
-                                    data-id="${p.id}" data-talla="${p.talla}">
-                                🗑
+                                  data-id="${p.id}">
+                                   🗑
                             </button>
                             <div class="row g-0">
                                 <div class="col-md-3 bg-light d-flex align-items-center justify-content-center p-3">

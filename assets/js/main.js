@@ -79,7 +79,7 @@ function activarImagenClick() {
 
 function renderCarrito() {
 
-    // 🔥 Siempre sincronizar
+    // Siempre sincronizar
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     const itemsPorPagina = 6;
@@ -87,13 +87,13 @@ function renderCarrito() {
 
     let paginaGuardada = parseInt(localStorage.getItem("paginaCarrito")) || 1;
 
-    // 🔥 Si carrito está vacío, limpiar paginación
+    // Si carrito está vacío, limpiar paginación
     if (carrito.length === 0) {
         localStorage.removeItem("paginaCarrito");
         return Views.carrito([]);
     }
 
-    // 🔥 Si la página guardada es inválida, corregir
+    // Si la página guardada es inválida, corregir
     if (paginaGuardada > totalPaginas) {
         paginaGuardada = totalPaginas;
         localStorage.setItem("paginaCarrito", paginaGuardada);
@@ -134,26 +134,33 @@ function asignarEventosEliminar() {
         if (!btn) return;
 
         const id = btn.dataset.id;
-        const talla = btn.dataset.talla ?? null;
 
-        let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+        // 🔥 MOSTRAR MODAL DE CONFIRMACIÓN
+        Modal.confirm(
+            "¿Estás seguro de eliminar esta polera del carrito?",
+            () => {
 
-        carritoActual = carritoActual.filter(p =>
-            !(String(p.id) === String(id) &&
-              String(p.talla ?? null) === String(talla))
+                let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+
+                // ELIMINAR TODAS LAS TALLAS DEL PRODUCTO
+                carritoActual = carritoActual.filter(p =>
+                    String(p.id) !== String(id)
+                );
+
+                localStorage.setItem("carrito", JSON.stringify(carritoActual));
+
+                // 🔥 ACTUALIZAR VARIABLE GLOBAL
+                carrito = carritoActual;
+
+                //  RE-RENDERIZAR
+                document.getElementById("view-container").innerHTML = renderCarrito();
+
+                if (pagination) {
+                    pagination.attachEvents();
+                }
+            }
         );
 
-        localStorage.setItem("carrito", JSON.stringify(carritoActual));
-
-        // 🔥 ACTUALIZAR VARIABLE GLOBAL
-        carrito = carritoActual;
-
-        // 🔥 VOLVER A RENDERIZAR DIRECTAMENTE
-        document.getElementById("view-container").innerHTML = renderCarrito();
-
-        if (pagination) {
-            pagination.attachEvents();
-        }
     });
 }
 
@@ -188,13 +195,13 @@ function asignarEventosCompra() {
             );
 
             if (yaExiste) {
-                Modal.show("⚠️ Este producto ya está en el carrito.");
+                Modal.show("Este producto ya está en el carrito.");
                 return;
             }
 
             carritoActual.push(nuevoItem);
             localStorage.setItem("carrito", JSON.stringify(carritoActual));
-            Modal.show(`✅ "${producto.nombre}" agregada al carrito.`);
+            Modal.show(`"${producto.nombre}" agregada al carrito.`);
         };
     });
 }
@@ -265,7 +272,7 @@ function asignarEventosCarritoDinamico() {
             const cantidad = inputCant ? parseInt(inputCant.value) : 1; 
 
             if (!talla) {
-                Modal.show("⚠️ Por favor, selecciona una talla.");
+                Modal.show("Por favor, selecciona una talla.");
                 return;
             }
 
@@ -277,7 +284,7 @@ function asignarEventosCarritoDinamico() {
             );
 
             if (existeTalla) {
-                Modal.show(`⚠️ La talla ${talla} ya está en el listado.`); 
+                Modal.show(`La talla ${talla} ya está en el listado.`); 
                 return;
             }
 
@@ -355,7 +362,7 @@ if (btnEliminarTalla) {
     container.innerHTML = renderCarrito();
     if (pagination) pagination.attachEvents();
     
-    Modal.show("🗑️ Talla eliminada del listado.");
+    Modal.show("Talla eliminada del listado.");
 }
 
 // Lógica boton editar
@@ -380,7 +387,12 @@ if (btnEditar) {
         `;
 
         // 2. Mostrar el modal con autoClose en false para evitar que desaparezca 
-        Modal.show(mensajeHtml, "Editar Cantidad", false);
+       Modal.show(
+    mensajeHtml,
+    "Modificar talla",
+    false,
+    "Guardar"
+);
 
         // 3. Capturamos el botón del modal manualmente para asegurar el evento
         const btnGuardarModal = document.getElementById("modal-close");
