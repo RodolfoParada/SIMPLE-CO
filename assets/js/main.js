@@ -9,6 +9,23 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let pagination;
 let miRouter;
 
+function actualizarContadorCarrito() {
+
+    const contador = document.getElementById("contador-carrito");
+    if (!contador) return; // 🔒 evita que se rompa si no existe
+
+    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    const productosUnicos = [...new Map(
+        carritoActual.map(item => [item.id, item])
+    ).values()];
+
+    const total = productosUnicos.length;
+
+    contador.textContent = total;
+    contador.style.display = total === 0 ? "none" : "inline-block";
+}
+
 const iniciarApp = async () => {
   aplicarModoGuardado();
   iniciarModoOscuro();
@@ -31,7 +48,7 @@ const iniciarApp = async () => {
       pagination.attachEvents();
     }
   });
-
+actualizarContadorCarrito();
   miRouter.iniciar();
 };
 
@@ -77,7 +94,7 @@ function renderCarrito() {
   // Siempre sincronizar
   carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-  const itemsPorPagina = 3;
+  const itemsPorPagina = 6;
   const totalPaginas = Math.ceil(carrito.length / itemsPorPagina);
 
   let paginaGuardada = parseInt(localStorage.getItem("paginaCarrito")) || 1;
@@ -134,7 +151,7 @@ function asignarEventosEliminar() {
       carritoActual = carritoActual.filter((p) => String(p.id) !== String(id));
 
       localStorage.setItem("carrito", JSON.stringify(carritoActual));
-
+      actualizarContadorCarrito();
       //ACTUALIZAR VARIABLE GLOBAL
       carrito = carritoActual;
 
@@ -187,6 +204,7 @@ function asignarEventosCompra() {
 
       carritoActual.push(nuevoItem);
       localStorage.setItem("carrito", JSON.stringify(carritoActual));
+      actualizarContadorCarrito();
       Modal.show(`"${producto.nombre}" agregada al carrito.`);
     };
   });
