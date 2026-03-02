@@ -49,3 +49,8 @@
     max-width: 1000px !important;
     width: 95% !important;
 }
+
+.modal-pago-formulario {
+   max-width: 550px !important;
+   width: 95% !important;
+}
