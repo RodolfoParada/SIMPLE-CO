@@ -143,9 +143,9 @@ carrito: (carrito) => {
                                     <span class="text-muted">Total a Pagar:</span>
                                     <span class="h3 mb-0 text-primary fw-bold">$${totalGeneral.toLocaleString('es-CL')}</span>
                                 </div>
-                                <button class="btn btn-primary btn-lg w-100 fw-bold rounded-pill shadow-sm">
-                                    PAGAR PEDIDO
-                                </button>
+                               <button id="btn-pagar-pedido" class="btn btn-primary btn-lg w-100 fw-bold rounded-pill shadow-sm">
+                                  PAGAR PEDIDO
+                               </button>
                             </div>
                         </div>
                     </div>

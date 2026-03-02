@@ -3,7 +3,8 @@ export class Modal {
     message,
     title = "Producto agregado",
     autoClose = true,
-    confirmText = "Aceptar"
+    confirmText = "Aceptar",
+    extraClass = ""
 ) {
 
     const existing = document.getElementById("custom-modal");
@@ -12,7 +13,7 @@ export class Modal {
     const modalHTML = `
         <div id="custom-modal" class="custom-modal-overlay">
 
-            <div class="custom-modal-box" style="position:relative;">
+           <div class="custom-modal-box ${extraClass}" style="position:relative;">
 
                 <!-- BOTÓN X -->
                 <button id="modal-close-x"
