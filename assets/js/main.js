@@ -483,14 +483,19 @@ function iniciarModoOscuro() {
           return;
         }
 
-        const subtotal = itemsValidos.reduce(
-          (acc, p) => acc + p.precio * p.cantidad,
-          0,
-        );
+     const subtotal = itemsValidos.reduce(
+  (acc, p) => acc + (p.precio * p.cantidad),
+  0
+);
 
-        const despacho = 7990;
-        const iva = Math.round(subtotal * 0.19);
-        const total = subtotal + iva + despacho;
+const despacho = 7990;
+
+// 🔥 Calcular neto e IVA correctamente
+const neto = Math.round(subtotal / 1.19);
+const iva = subtotal - neto;
+
+// 🔥 Total final (NO se vuelve a sumar IVA)
+const total = subtotal + despacho;
 
         const html = `
         <div style="width:800px; max-width:90vw; margin:0 auto;">
