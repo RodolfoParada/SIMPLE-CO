@@ -1,6 +1,6 @@
 // views.js
 export const Views = {
-    // Se mantiene la estructura de catálogo original [cite: 479]
+    // Se mantiene la estructura de catálogo original
     catalogo: (productos, paginationHTML) => `
         <h2 class="text-center mb-4 text-uppercase">Nuestra Colección</h2>
         <div class="row g-4">
@@ -39,7 +39,7 @@ carrito: (carrito) => {
         `;
     }
 
-    // Mantenemos tu lógica original de productos únicos [cite: 665]
+    // Mantenemos tu lógica original de productos únicos 
     const productosUnicos = [...new Map(carrito.map(item => [item.id, item])).values()];
     const totalGeneral = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
 
@@ -49,7 +49,7 @@ carrito: (carrito) => {
             <div class="row g-4">
                 <div class="col-lg-8">
                     ${productosUnicos.map(p => {
-                        // FILTRO CLAVE: Solo tallas que NO sean null para el listado [cite: 674]
+                        // FILTRO CLAVE: Solo tallas que NO sean null para el listado 
                         const tallasAgregadas = carrito.filter(item => item.id === p.id && item.talla !== null);
                         
                         const subtotalPorPolera = tallasAgregadas.reduce(

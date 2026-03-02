@@ -135,7 +135,7 @@ function asignarEventosEliminar() {
 
         const id = btn.dataset.id;
 
-        // 🔥 MOSTRAR MODAL DE CONFIRMACIÓN
+        //MOSTRAR MODAL DE CONFIRMACIÓN
         Modal.confirm(
             "¿Estás seguro de eliminar esta polera del carrito?",
             () => {
@@ -149,7 +149,7 @@ function asignarEventosEliminar() {
 
                 localStorage.setItem("carrito", JSON.stringify(carritoActual));
 
-                // 🔥 ACTUALIZAR VARIABLE GLOBAL
+                //ACTUALIZAR VARIABLE GLOBAL
                 carrito = carritoActual;
 
                 //  RE-RENDERIZAR
