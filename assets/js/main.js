@@ -457,6 +457,68 @@ if (btnEditar) {
     }
 }
 
+const btnPagar = e.target.closest("#btn-pagar-pedido");
+
+if (btnPagar) {
+    mostrarResumenPago();
+}
+
+function mostrarResumenPago() {
+
+    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+    const itemsValidos = carritoActual.filter(p => p.talla !== null);
+
+    if (itemsValidos.length === 0) {
+        Modal.show("No hay productos con talla seleccionada.");
+        return;
+    }
+
+    const subtotal = itemsValidos.reduce((acc, p) =>
+        acc + (p.precio * p.cantidad), 0
+    );
+
+    const despacho = 7990;
+    const iva = Math.round(subtotal * 0.19);
+    const total = subtotal + iva + despacho;
+
+    const html = `
+        <div style="width:800px; max-width:90vw;">
+
+            <h4 class="mb-4">Resumen de Compra</h4>
+
+            ${itemsValidos.map(p => `
+                <div style="display:flex; gap:15px; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:15px;">
+                    
+                    <img src="${p.url}" 
+                         style="width:90px; height:90px; object-fit:contain;">
+
+                    <div style="flex:1;">
+                        <h6 class="mb-1">${p.nombre}</h6>
+                        <small class="text-muted">
+                            Talla: ${p.talla} | Cantidad: ${p.cantidad}
+                        </small>
+                        <div class="fw-bold mt-1">
+                            $${(p.precio * p.cantidad).toLocaleString('es-CL')}
+                        </div>
+                    </div>
+                </div>
+            `).join("")}
+
+            <hr>
+
+            <div style="text-align:right;">
+                <div>Subtotal: <strong>$${subtotal.toLocaleString('es-CL')}</strong></div>
+                <div>IVA (19%): <strong>$${iva.toLocaleString('es-CL')}</strong></div>
+                <div>Despacho: <strong>$${despacho.toLocaleString('es-CL')}</strong></div>
+                <h5 class="mt-2">Total: $${total.toLocaleString('es-CL')}</h5>
+            </div>
+
+        </div>
+    `;
+
+    Modal.show(html, "Confirmar Pedido", false, "Realizar Pago", "modal-pago-grande");
+}
+
     });
 }
 

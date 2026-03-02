@@ -43,3 +43,9 @@
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+/* Modal ancho solo para pago */
+.modal-pago-grande {
+    max-width: 1000px !important;
+    width: 95% !important;
+}
