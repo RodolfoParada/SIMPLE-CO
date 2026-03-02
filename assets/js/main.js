@@ -482,27 +482,34 @@ function mostrarResumenPago() {
     const total = subtotal + iva + despacho;
 
     const html = `
-        <div style="width:800px; max-width:90vw;">
+        <div style="width:800px; max-width:90vw; margin:0 auto;">
 
-            <h4 class="mb-4">Resumen de Compra</h4>
+            <h4 class="mb-4 fw-bold text-center ">Resumen de Compra</h4>
+${itemsValidos.map(p => `
+    <div style="
+        display:flex;
+        gap:15px;
+        margin:0 auto 20px auto;
+        border-bottom:1px solid #eee;
+        padding-bottom:15px;
+        max-width:600px;
+        align-items:center;
+    ">
+        
+        <img src="${p.url}" 
+             style="width:90px; height:90px; object-fit:contain;">
 
-            ${itemsValidos.map(p => `
-                <div style="display:flex; gap:15px; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:15px;">
-                    
-                    <img src="${p.url}" 
-                         style="width:90px; height:90px; object-fit:contain;">
-
-                    <div style="flex:1;">
-                        <h6 class="mb-1">${p.nombre}</h6>
-                        <small class="text-muted">
-                            Talla: ${p.talla} | Cantidad: ${p.cantidad}
-                        </small>
-                        <div class="fw-bold mt-1">
-                            $${(p.precio * p.cantidad).toLocaleString('es-CL')}
-                        </div>
-                    </div>
-                </div>
-            `).join("")}
+        <div style="flex:1;">
+            <h6 class="mb-1">${p.nombre}</h6>
+            <small class="text-muted">
+                Talla: ${p.talla} | Cantidad: ${p.cantidad}
+            </small>
+            <div class="fw-bold mt-1">
+                $${(p.precio * p.cantidad).toLocaleString('es-CL')}
+            </div>
+        </div>
+    </div>
+`).join("")}
 
             <hr>
 
@@ -516,9 +523,160 @@ function mostrarResumenPago() {
         </div>
     `;
 
-    Modal.show(html, "Confirmar Pedido", false, "Realizar Pago", "modal-pago-grande");
+    Modal.show(html, "", false, "Realizar Pago", "modal-pago-grande");
+
+     setTimeout(() => {
+
+      const btnRealizarPago = document.getElementById("modal-close");
+
+      if (!btnRealizarPago) return;
+
+      btnRealizarPago.onclick = (e) => {
+         e.preventDefault();
+
+         const modal = document.getElementById("custom-modal");
+         if (modal) modal.remove();
+
+         mostrarFormularioPago();
+      };
+
+   }, 50);
 }
 
+function mostrarFormularioPago() {
+
+   const html = `
+   <div style="max-width:600px; text-align:left;">
+
+      <h4 class="mb-4 text-center">Formulario de Pago</h4>
+
+      <div class="mb-3">
+         <label>Nombre</label>
+         <input type="text" id="pago-nombre" class="form-control">
+      </div>
+
+      <div class="mb-3">
+         <label>RUT</label>
+         <input type="text" id="pago-rut" class="form-control" maxlength="9">
+      </div>
+
+      <div class="mb-3">
+         <label>Correo Electrónico</label>
+         <input type="email" id="pago-correo" class="form-control">
+      </div>
+
+      <div class="mb-3">
+         <label>Dirección</label>
+         <input type="text" id="pago-direccion" class="form-control" maxlength="50">
+      </div>
+
+      <div class="mb-3">
+         <label>Banco</label>
+         <select id="pago-banco" class="form-select">
+            <option value="">Seleccionar banco</option>
+            <option>Banco Estado</option>
+            <option>Banco de Chile</option>
+            <option>BCI</option>
+            <option>Santander</option>
+            <option>Scotiabank</option>
+         </select>
+      </div>
+
+      <div class="mb-3">
+         <label>Número de Cuenta</label>
+         <input type="text" id="pago-cuenta" class="form-control"
+                maxlength="19"
+                placeholder="0000-0000-0000-0000">
+      </div>
+
+   </div>
+   `;
+
+   Modal.show(html, "", false, "Pagar", "modal-pago-formulario");
+
+   setTimeout(() => activarValidacionPago(), 50);
+}
+
+function activarValidacionPago() {
+
+   const btnPagar = document.getElementById("modal-close");
+
+   const nombre = document.getElementById("pago-nombre");
+   const rut = document.getElementById("pago-rut");
+   const correo = document.getElementById("pago-correo");
+   const direccion = document.getElementById("pago-direccion");
+   const banco = document.getElementById("pago-banco");
+   const cuenta = document.getElementById("pago-cuenta");
+
+   // Formato automático cuenta
+   cuenta.addEventListener("input", (e) => {
+      let valor = e.target.value.replace(/\D/g, "").substring(0,16);
+      valor = valor.match(/.{1,4}/g)?.join("-") || valor;
+      e.target.value = valor;
+   });
+
+   btnPagar.onclick = () => {
+
+      let valido = true;
+
+      [nombre, rut, correo, direccion, banco, cuenta].forEach(c => {
+         c.style.border = "";
+      });
+
+      // Nombre obligatorio
+      if (nombre.value.trim() === "") {
+         nombre.style.border = "2px solid red";
+         valido = false;
+      }
+
+      // RUT: 8 números + número o K
+      const rutRegex = /^[0-9]{8}[0-9kK]$/;
+      if (!rutRegex.test(rut.value)) {
+         rut.style.border = "2px solid red";
+         valido = false;
+      }
+
+      // Email básico
+      if (!correo.value.includes("@")) {
+         correo.style.border = "2px solid red";
+         valido = false;
+      }
+
+      // Dirección alfanumérica max 50
+      const dirRegex = /^[a-zA-Z0-9\s#-]{1,50}$/;
+      if (!dirRegex.test(direccion.value)) {
+         direccion.style.border = "2px solid red";
+         valido = false;
+      }
+
+      // Banco obligatorio
+      if (banco.value === "") {
+         banco.style.border = "2px solid red";
+         valido = false;
+      }
+
+      // Cuenta 16 dígitos
+      const cuentaNumeros = cuenta.value.replace(/-/g, "");
+      if (cuentaNumeros.length !== 16) {
+         cuenta.style.border = "2px solid red";
+         valido = false;
+      }
+
+      if (!valido) {
+         Modal.show("Datos incorrectos", "Error", true);
+         return;
+      }
+
+      // TODO OK
+      Modal.show("Pago realizado", "Éxito", true);
+
+      localStorage.removeItem("carrito");
+
+      setTimeout(() => {
+         window.location.hash = "/";
+      }, 1500);
+   };
+}
     });
 }
 
