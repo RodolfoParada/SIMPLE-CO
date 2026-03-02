@@ -41,7 +41,12 @@ carrito: (carrito) => {
 
     // Mantenemos tu lógica original de productos únicos 
     const productosUnicos = [...new Map(carrito.map(item => [item.id, item])).values()];
-    const totalGeneral = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
+    const carritoCompleto = JSON.parse(localStorage.getItem("carrito")) || [];
+
+const totalGeneral = carritoCompleto.reduce(
+    (acc, p) => acc + (p.precio * p.cantidad),
+    0
+);
 
     return `
         <div class="container my-5">
