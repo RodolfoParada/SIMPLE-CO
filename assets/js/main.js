@@ -209,9 +209,9 @@ function iniciarModoOscuro() {
 
   if (modoGuardado === "true") {
     document.body.classList.add("dark");
-    toggleBtn.textContent = "☀️ Modo Claro";
+    toggleBtn.textContent = "Modo Claro";
   } else {
-    toggleBtn.textContent = "🌙 Modo Oscuro";
+    toggleBtn.textContent = "Modo Oscuro";
   }
 
   // 🔹 Evento click
@@ -223,7 +223,7 @@ function iniciarModoOscuro() {
     localStorage.setItem("modoOscuro", modoActivo);
 
     // Cambiar texto dinámicamente
-    toggleBtn.textContent = modoActivo ? "☀️ Modo Claro" : "🌙 Modo Oscuro";
+    toggleBtn.textContent = modoActivo ? "Modo Claro" : "Modo Oscuro";
   });
 
   // Dentro de main.js, añade este listener para capturar los clics en el contenedor del carrito
