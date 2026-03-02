@@ -117,7 +117,7 @@ export class Modal {
         modal.remove();
     };
 
-    // ❌ Botón X
+    // Botón X
     document.getElementById("modal-close-x").onclick = () => {
         modal.remove();
     };

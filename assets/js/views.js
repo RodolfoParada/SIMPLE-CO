@@ -1,6 +1,6 @@
 // views.js
 export const Views = {
-    // Se mantiene la estructura de catálogo original [cite: 479]
+    // Se mantiene la estructura de catálogo original
     catalogo: (productos, paginationHTML) => `
         <h2 class="text-center mb-4 text-uppercase">Nuestra Colección</h2>
         <div class="row g-4">
@@ -12,7 +12,7 @@ export const Views = {
                         <div class="card-body text-center">
                             <h5 class="fw-bold">${p.nombre}</h5>
                             <p class="text-muted small">${p.color}</p>
-                            <p class="fw-bold text-primary fs-5">$ ${p.precio.toLocaleString('es-CL')}</p>
+                            <p class="fw-bold fs-5">$ ${p.precio.toLocaleString('es-CL')}</p>
                             <button class="btn btn-dark w-100 btn-add rounded-pill" data-id="${p.id}">
                                 <i class="bi bi-cart-plus me-2"></i>Comprar
                             </button>
@@ -39,7 +39,7 @@ carrito: (carrito) => {
         `;
     }
 
-    // Mantenemos tu lógica original de productos únicos [cite: 665]
+    // Mantenemos tu lógica original de productos únicos 
     const productosUnicos = [...new Map(carrito.map(item => [item.id, item])).values()];
     const totalGeneral = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
 
@@ -49,7 +49,7 @@ carrito: (carrito) => {
             <div class="row g-4">
                 <div class="col-lg-8">
                     ${productosUnicos.map(p => {
-                        // FILTRO CLAVE: Solo tallas que NO sean null para el listado [cite: 674]
+                        // FILTRO CLAVE: Solo tallas que NO sean null para el listado 
                         const tallasAgregadas = carrito.filter(item => item.id === p.id && item.talla !== null);
                         
                         const subtotalPorPolera = tallasAgregadas.reduce(
@@ -58,9 +58,9 @@ carrito: (carrito) => {
 
                         return `
                         <div class="card mb-4 shadow-sm border-0 position-relative">
-                            <button class="btn btn-sm btn-danger btn-eliminar position-absolute top-0 end-0 m-2"
+                            <button class="btn btn-sm  btn-eliminar position-absolute top-0 end-0 m-2"
                                   data-id="${p.id}">
-                                   🗑
+                                   <i class="bi bi-trash text-danger"></i>
                             </button>
                             <div class="row g-0">
                                 <div class="col-md-3 bg-light d-flex align-items-center justify-content-center p-3">
@@ -71,7 +71,7 @@ carrito: (carrito) => {
                                         <h5 class="fw-bold">${p.nombre}</h5>
                                         <p class="text-muted small">Precio Unitario: $${p.precio.toLocaleString('es-CL')}</p>
                                         
-                                        <div class="row g-2 align-items-end border p-3 rounded bg-white mb-3">
+                                        <div class="talla row g-2 align-items-end border p-3 rounded bg-white mb-3">
                                             <div class="col-4">
                                                 <label class="small fw-bold">Talla:</label>
                                                 <select class="form-select form-select-sm select-talla-dinamica" data-id="${p.id}">
@@ -141,9 +141,9 @@ carrito: (carrito) => {
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <span class="text-muted">Total a Pagar:</span>
-                                    <span class="h3 mb-0 text-primary fw-bold">$${totalGeneral.toLocaleString('es-CL')}</span>
+                                    <span class="h3 mb-0  fw-bold">$${totalGeneral.toLocaleString('es-CL')}</span>
                                 </div>
-                               <button id="btn-pagar-pedido" class="btn btn-primary btn-lg w-100 fw-bold rounded-pill shadow-sm">
+                               <button id="btn-pagar-pedido" class="btn btn-dark  btn-lg w-100 fw-bold rounded-pill shadow-sm">
                                   PAGAR PEDIDO
                                </button>
                             </div>

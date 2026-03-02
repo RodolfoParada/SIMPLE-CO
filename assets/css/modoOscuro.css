@@ -16,7 +16,9 @@ body.dark .card {
   background-color: #1e1e1e !important;
   color: white !important;
 }
-
+body.dark .talla{
+ background-color: #1e1e1e !important;
+}
 /* Botones en modo oscuro */
 body.dark .btn-dark {
   background-color: #212529 !important; 

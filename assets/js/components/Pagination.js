@@ -30,7 +30,7 @@ export class Pagination {
                     class="btn btn-outline-dark  btn-prev"
                     ${this.currentPage === 1 ? "disabled" : ""}
                 >
-                    ←
+                    <i class="bi bi-arrow-left"></i>
                 </button>
 
                 <span class="fw-bold">
@@ -41,7 +41,7 @@ export class Pagination {
                     class="btn btn-outline-dark btn-next"
                     ${this.currentPage === this.totalPages ? "disabled" : ""}
                 >
-                    →
+                    <i class="bi bi-arrow-right"></i>
                 </button>
 
             </div>
