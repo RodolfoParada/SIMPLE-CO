@@ -80,7 +80,6 @@ Incluye:
 - Bootstrap 5
 - JavaScript ES6+
 - LocalStorage
-- Arquitectura modular
 - SPA con Hash Router
 
 ---
@@ -113,7 +112,6 @@ Incluye:
 - Componentes reutilizables
 - Delegación de eventos
 - Renderizado dinámico
-- Código modular
 - Uso correcto de `map`, `filter`, `reduce`
 - Manejo de estado manual sin frameworks
 
