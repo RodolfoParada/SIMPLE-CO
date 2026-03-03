@@ -1,34 +1,41 @@
 // views.js
 export const Views = {
-    // Se mantiene la estructura de catálogo original
-    catalogo: (productos, paginationHTML) => `
+  // Se mantiene la estructura de catálogo original
+  catalogo: (productos, paginationHTML) => `
         <h2 class="text-center mb-4 text-uppercase">Nuestra Colección</h2>
         <div class="row g-4">
-            ${productos.map(p => `
+            ${productos
+              .map(
+                (p) => `
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 shadow-sm border-0">
                         <img src="${p.url}" class="producto-img img-fluid card-img-top p-3" 
                              style="height:300px; object-fit:contain;" alt="${p.nombre}">
                         <div class="card-body text-center">
                             <h5 class="fw-bold">${p.nombre}</h5>
-                            <p class="text-muted small">${p.color}</p>
-                            <p class="fw-bold fs-5">$ ${p.precio.toLocaleString('es-CL')}</p>
-                            <button class="btn btn-dark w-100 btn-add rounded-pill" data-id="${p.id}">
-                                <i class="bi bi-cart-plus me-2"></i>Comprar
+                            <button class="btn btn-outline-secondary w-100 mt-2 btn-especificaciones"
+                                 data-id="${p.id}">
+                                   Ver especificaciones
                             </button>
+                            <p class="fw-bold fs-5">$ ${p.precio.toLocaleString("es-CL")}</p>
+                            <button class="btn btn-outline-secondary w-100 btn-add rounded-pill" data-id="${p.id}">
+                                <i class="bi bi-cart-plus me-2"></i>Comprar
+                                </button>
                         </div>
                     </div>
                 </div>
-            `).join("")}
+            `,
+              )
+              .join("")}
         </div>
         <div class="mt-5">${paginationHTML}</div>
     `,
 
-// assets/js/views.js
+  // assets/js/views.js
 
-carrito: (carrito) => {
+  carrito: (carrito) => {
     if (!carrito || carrito.length === 0) {
-        return `
+      return `
             <div class="container my-5">
                 <div class="text-center py-5">
                     <h2 class="mb-4">Carrito</h2>
@@ -39,26 +46,32 @@ carrito: (carrito) => {
         `;
     }
 
-    // Mantenemos tu lógica original de productos únicos 
-    const productosUnicos = [...new Map(carrito.map(item => [item.id, item])).values()];
+    // Mantenemos tu lógica original de productos únicos
+    const productosUnicos = [
+      ...new Map(carrito.map((item) => [item.id, item])).values(),
+    ];
     const carritoCompleto = JSON.parse(localStorage.getItem("carrito")) || [];
 
-const totalGeneral = carritoCompleto.reduce(
-    (acc, p) => acc + (p.precio * p.cantidad),
-    0
-);
+    const totalGeneral = carritoCompleto.reduce(
+      (acc, p) => acc + p.precio * p.cantidad,
+      0,
+    );
 
     return `
         <div class="container my-5">
             <h2 class="mb-4 fw-bold">Gestión de Pedido</h2>
             <div class="row g-4">
                 <div class="col-lg-8">
-                    ${productosUnicos.map(p => {
-                        // FILTRO CLAVE: Solo tallas que NO sean null para el listado 
-                        const tallasAgregadas = carrito.filter(item => item.id === p.id && item.talla !== null);
-                        
+                    ${productosUnicos
+                      .map((p) => {
+                        // FILTRO CLAVE: Solo tallas que NO sean null para el listado
+                        const tallasAgregadas = carrito.filter(
+                          (item) => item.id === p.id && item.talla !== null,
+                        );
+
                         const subtotalPorPolera = tallasAgregadas.reduce(
-                            (acc, t) => acc + (t.precio * t.cantidad), 0
+                          (acc, t) => acc + t.precio * t.cantidad,
+                          0,
                         );
 
                         return `
@@ -74,7 +87,7 @@ const totalGeneral = carritoCompleto.reduce(
                                 <div class="col-md-9">
                                     <div class="card-body">
                                         <h5 class="fw-bold">${p.nombre}</h5>
-                                        <p class="text-muted small">Precio Unitario: $${p.precio.toLocaleString('es-CL')}</p>
+                                        <p class="text-muted small">Precio Unitario: $${p.precio.toLocaleString("es-CL")}</p>
                                         
                                         <div class="talla row g-2 align-items-end border p-3 rounded bg-white mb-3">
                                             <div class="col-4">
@@ -99,18 +112,22 @@ const totalGeneral = carritoCompleto.reduce(
                                         </div>
 
                                         <div class="listado-tallas-agregadas" id="listado-${p.id}">
-                                            ${tallasAgregadas.length > 0 ? `
+                                            ${
+                                              tallasAgregadas.length > 0
+                                                ? `
                                                 <div class="row g-0 py-1 border-bottom fw-bold small text-muted">
                                                     <div class="col-3">Talla</div>
                                                     <div class="col-2 text-center">Cant.</div>
                                                     <div class="col-3 text-end">Total</div>
                                                     <div class="col-4 text-end">Acciones</div>
                                                 </div>
-                                                ${tallasAgregadas.map(t => `
+                                                ${tallasAgregadas
+                                                  .map(
+                                                    (t) => `
                                                     <div class="row g-0 py-2 border-bottom align-items-center">
                                                         <div class="col-3"><span class="badge bg-secondary">${t.talla}</span></div>
                                                         <div class="col-2 text-center">${t.cantidad}</div>
-                                                        <div class="col-3 text-end fw-bold">$${(t.precio * t.cantidad).toLocaleString('es-CL')}</div>
+                                                        <div class="col-3 text-end fw-bold">$${(t.precio * t.cantidad).toLocaleString("es-CL")}</div>
                                                         <div class="col-4 text-end">
                                                             <button class="btn btn-sm btn-outline-primary border-0 btn-editar-talla" 
                                                                     data-id="${p.id}" data-talla="${t.talla}">
@@ -122,20 +139,25 @@ const totalGeneral = carritoCompleto.reduce(
                                                             </button>
                                                         </div>
                                                     </div>
-                                                `).join("")}
-                                            ` : ''}
+                                                `,
+                                                  )
+                                                  .join("")}
+                                            `
+                                                : ""
+                                            }
                                         </div>                   
 
                                         <div class="text-end mt-3">
                                             <span class="small text-muted d-block">Subtotal Polera</span>
-                                            <span class="fw-bold text-dark">$${subtotalPorPolera.toLocaleString('es-CL')}</span>
+                                            <span class="fw-bold text-dark">$${subtotalPorPolera.toLocaleString("es-CL")}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         `;
-                    }).join("")}
+                      })
+                      .join("")}
                 </div>
 
                 <div class="col-lg-4">
@@ -146,7 +168,7 @@ const totalGeneral = carritoCompleto.reduce(
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <span class="text-muted">Total a Pagar:</span>
-                                    <span class="h3 mb-0  fw-bold">$${totalGeneral.toLocaleString('es-CL')}</span>
+                                    <span class="h3 mb-0  fw-bold">$${totalGeneral.toLocaleString("es-CL")}</span>
                                 </div>
                                <button id="btn-pagar-pedido" class="btn btn-dark  btn-lg w-100 fw-bold rounded-pill shadow-sm">
                                   PAGAR PEDIDO
@@ -158,6 +180,5 @@ const totalGeneral = carritoCompleto.reduce(
             </div>
         </div>
     `;
-}
-
+  },
 };

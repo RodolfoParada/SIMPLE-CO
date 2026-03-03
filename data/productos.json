@@ -4,6 +4,13 @@
         "nombre": "Polera Negra",
         "color": "Negra",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 300 },
                 { "talla": "S", "stock": 500 },
@@ -20,6 +27,13 @@
         "nombre": "Polera Verde",
         "color": "Verde",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 1000 },
                 { "talla": "S", "stock": 1500 },
@@ -36,6 +50,13 @@
         "nombre": "Polera Café",
         "color": "Negro Toro",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 500 },
                 { "talla": "S", "stock": 300 },
@@ -52,7 +73,14 @@
         "nombre": "Polera Anime Tanjiro Kamado",
         "color": "Negra",
         "precio": 15990,
-             "poleras": [
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ], 
+        "poleras": [
                 { "talla": "XS", "stock": 200 },
                 { "talla": "S", "stock": 100 },
                 { "talla": "M", "stock": 30 },
@@ -67,7 +95,14 @@
         "id": 5,
         "nombre": "Polera Gris",
         "color": "Gris",
-       "precio": 15990,
+        "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
             "poleras": [
                 { "talla": "XS", "stock": 333 },
                 { "talla": "S", "stock": 67 },
@@ -84,6 +119,13 @@
         "nombre": "Polera Balenciaga",
         "color": "Negro",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
             "poleras": [
                 { "talla": "XS", "stock": 110 },
                 { "talla": "S", "stock": 222 },
@@ -101,6 +143,13 @@
         "nombre": "Polera Granate",
         "color": "Granate",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 610 },
                 { "talla": "S", "stock": 170 },
@@ -117,6 +166,13 @@
         "nombre": "Polera Cian",
         "color": "Cian",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 845 },
                 { "talla": "S", "stock": 965 },
@@ -133,6 +189,13 @@
         "nombre": "Polera Rojo",
         "color": "Rojo",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 10 },
                 { "talla": "S", "stock": 10 },
@@ -149,6 +212,13 @@
         "nombre": "Polera Verde-Claro",
         "color": "Verde Claro",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 5110 },
                 { "talla": "S", "stock": 8910 },
@@ -165,6 +235,13 @@
         "nombre": "Polera Naranja",
         "color": "Naranja",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 310 },
                 { "talla": "S", "stock": 210 },
@@ -181,6 +258,13 @@
         "nombre": "Polera Azul",
         "color": "Azul",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 3610 },
                 { "talla": "S", "stock": 1200 },
@@ -197,6 +281,13 @@
         "nombre": "Polera Crema Las Vegas",
         "color": "Crema",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 11 },
                 { "talla": "S", "stock": 94 },
@@ -213,6 +304,13 @@
         "nombre": "Polera Off-White ",
         "color": "Rojo",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 1881 },
                 { "talla": "S", "stock": 954 },
@@ -229,6 +327,13 @@
         "nombre": "Polera Blanca",
         "color": "Blanca",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable. Ideal para estampado.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 181 },
                 { "talla": "S", "stock": 1954 },
@@ -245,6 +350,13 @@
         "nombre": "Polera Estoy Bien",
         "color": "Negra",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 18 },
                 { "talla": "S", "stock": 19 },
@@ -261,6 +373,13 @@
         "nombre": "Polera Resident Evil",
         "color": "Negra",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 918 },
                 { "talla": "S", "stock": 719 },
@@ -277,6 +396,13 @@
         "nombre": "Polera Superman",
         "color": "Azul",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 98 },
                 { "talla": "S", "stock": 79 },
@@ -293,6 +419,13 @@
         "nombre": "Polera The Flash",
         "color": "Rojo",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 298 },
                 { "talla": "S", "stock": 379 },
@@ -308,6 +441,13 @@
         "nombre": "Polera Wolverine",
         "color": "Negra",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 28 },
                 { "talla": "S", "stock": 39 },
@@ -323,6 +463,13 @@
         "nombre": "Polera Magneto",
         "color": "Negra",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 228 },
                 { "talla": "S", "stock": 339 },
@@ -338,6 +485,13 @@
         "nombre": "Polera X-MEN",
         "color": "Blanca",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 828 },
                 { "talla": "S", "stock": 939 },
@@ -353,6 +507,13 @@
         "nombre": "Polera Cyclope",
         "color": "Rojo",
         "precio": 15990,
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "poleras": [
                 { "talla": "XS", "stock": 428 },
                 { "talla": "S", "stock": 439 },
@@ -367,6 +528,13 @@
         "id": 24,
         "nombre": "Polera Advengers",
         "color": "Negra",
+        "descripcion": "Polera 100% algodón premium. Corte unisex. Tela suave y respirable.",
+        "especificaciones": [
+              "100% algodón",
+              "Gramaje 180g",
+              "Costuras reforzadas",
+              "Cuello redondo elasticado"
+        ],
         "precio": 15990,
                 "poleras": [
                 { "talla": "XS", "stock": 4028 },
