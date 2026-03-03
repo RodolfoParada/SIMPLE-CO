@@ -10,20 +10,19 @@ let pagination;
 let miRouter;
 
 function actualizarContadorCarrito() {
+  const contador = document.getElementById("contador-carrito");
+  if (!contador) return; // 🔒 evita que se rompa si no existe
 
-    const contador = document.getElementById("contador-carrito");
-    if (!contador) return; // 🔒 evita que se rompa si no existe
+  const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    const carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
+  const productosUnicos = [
+    ...new Map(carritoActual.map((item) => [item.id, item])).values(),
+  ];
 
-    const productosUnicos = [...new Map(
-        carritoActual.map(item => [item.id, item])
-    ).values()];
+  const total = productosUnicos.length;
 
-    const total = productosUnicos.length;
-
-    contador.textContent = total;
-    contador.style.display = total === 0 ? "none" : "inline-block";
+  contador.textContent = total;
+  contador.style.display = total === 0 ? "none" : "inline-block";
 }
 
 const iniciarApp = async () => {
@@ -47,43 +46,38 @@ const iniciarApp = async () => {
     if (pagination) {
       pagination.attachEvents();
     }
-    document.getElementById("view-container")
-  .addEventListener("click", (e) => {
+    document.getElementById("view-container").addEventListener("click", (e) => {
+      const btnSpecs = e.target.closest(".btn-especificaciones");
+      if (!btnSpecs) return;
 
-    const btnSpecs = e.target.closest(".btn-especificaciones");
-    if (!btnSpecs) return;
+      const id = btnSpecs.dataset.id;
 
-    const id = btnSpecs.dataset.id;
+      const producto = productosData.find((p) => String(p.id) === String(id));
 
-    const producto = productosData.find(
-      p => String(p.id) === String(id)
-    );
+      if (!producto) return;
 
-    if (!producto) return;
-
-    let html = `
+      let html = `
       <div style="text-align:left">
         <h5 class="mb-3">${producto.nombre}</h5>
         <p>${producto.descripcion || ""}</p>
     `;
 
-    if (producto.especificaciones) {
-      html += `
+      if (producto.especificaciones) {
+        html += `
         <ul>
           ${producto.especificaciones
-            .map(item => `<li>${item}</li>`)
+            .map((item) => `<li>${item}</li>`)
             .join("")}
         </ul>
       `;
-    }
+      }
 
-    html += `</div>`;
+      html += `</div>`;
 
-    Modal.show(html, "Especificaciones", false, "Cerrar");
-
-});
+      Modal.show(html, "Especificaciones", false, "Cerrar");
+    });
   });
-actualizarContadorCarrito();
+  actualizarContadorCarrito();
   miRouter.iniciar();
 };
 
@@ -518,19 +512,19 @@ function iniciarModoOscuro() {
           return;
         }
 
-     const subtotal = itemsValidos.reduce(
-  (acc, p) => acc + (p.precio * p.cantidad),
-  0
-);
+        const subtotal = itemsValidos.reduce(
+          (acc, p) => acc + p.precio * p.cantidad,
+          0,
+        );
 
-const despacho = 7990;
+        const despacho = 7990;
 
-// Calcular neto e IVA correctamente
-const neto = Math.round(subtotal / 1.19);
-const iva = subtotal - neto;
+        // Calcular neto e IVA correctamente
+        const neto = Math.round(subtotal / 1.19);
+        const iva = subtotal - neto;
 
-// Total final (NO se vuelve a sumar IVA)
-const total = subtotal + despacho;
+        // Total final (NO se vuelve a sumar IVA)
+        const total = subtotal + despacho;
 
         const html = `
         <div style="width:800px; max-width:90vw; margin:0 auto;">
