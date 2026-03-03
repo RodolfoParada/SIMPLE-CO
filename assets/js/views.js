@@ -11,11 +11,15 @@ export const Views = {
                              style="height:300px; object-fit:contain;" alt="${p.nombre}">
                         <div class="card-body text-center">
                             <h5 class="fw-bold">${p.nombre}</h5>
+                            <button class="btn btn-outline-secondary w-100 mt-2 btn-especificaciones"
+                                 data-id="${p.id}">
+                                   Ver especificaciones
+                            </button>
                             <p class="text-muted small">${p.color}</p>
                             <p class="fw-bold fs-5">$ ${p.precio.toLocaleString('es-CL')}</p>
-                            <button class="btn btn-dark w-100 btn-add rounded-pill" data-id="${p.id}">
+                            <button class="btn btn-outline-secondary w-100 btn-add rounded-pill" data-id="${p.id}">
                                 <i class="bi bi-cart-plus me-2"></i>Comprar
-                            </button>
+                                </button>
                         </div>
                     </div>
                 </div>

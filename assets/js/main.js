@@ -47,6 +47,41 @@ const iniciarApp = async () => {
     if (pagination) {
       pagination.attachEvents();
     }
+    document.getElementById("view-container")
+  .addEventListener("click", (e) => {
+
+    const btnSpecs = e.target.closest(".btn-especificaciones");
+    if (!btnSpecs) return;
+
+    const id = btnSpecs.dataset.id;
+
+    const producto = productosData.find(
+      p => String(p.id) === String(id)
+    );
+
+    if (!producto) return;
+
+    let html = `
+      <div style="text-align:left">
+        <h5 class="mb-3">${producto.nombre}</h5>
+        <p>${producto.descripcion || ""}</p>
+    `;
+
+    if (producto.especificaciones) {
+      html += `
+        <ul>
+          ${producto.especificaciones
+            .map(item => `<li>${item}</li>`)
+            .join("")}
+        </ul>
+      `;
+    }
+
+    html += `</div>`;
+
+    Modal.show(html, "Especificaciones", false, "Cerrar");
+
+});
   });
 actualizarContadorCarrito();
   miRouter.iniciar();
@@ -490,11 +525,11 @@ function iniciarModoOscuro() {
 
 const despacho = 7990;
 
-// 🔥 Calcular neto e IVA correctamente
+// Calcular neto e IVA correctamente
 const neto = Math.round(subtotal / 1.19);
 const iva = subtotal - neto;
 
-// 🔥 Total final (NO se vuelve a sumar IVA)
+// Total final (NO se vuelve a sumar IVA)
 const total = subtotal + despacho;
 
         const html = `
