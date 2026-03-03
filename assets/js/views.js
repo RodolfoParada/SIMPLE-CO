@@ -15,7 +15,6 @@ export const Views = {
                                  data-id="${p.id}">
                                    Ver especificaciones
                             </button>
-                            <p class="text-muted small">${p.color}</p>
                             <p class="fw-bold fs-5">$ ${p.precio.toLocaleString('es-CL')}</p>
                             <button class="btn btn-outline-secondary w-100 btn-add rounded-pill" data-id="${p.id}">
                                 <i class="bi bi-cart-plus me-2"></i>Comprar
