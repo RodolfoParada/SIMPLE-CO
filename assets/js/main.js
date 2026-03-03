@@ -707,16 +707,27 @@ ${itemsValidos
           }
 
           if (!valido) {
-            Modal.show("Datos incorrectos", "Error", true);
+            Modal.show("datos incompletos", "Error", true);
             return;
           }
 
           // TODO OK
-          Modal.show("Pago realizado", "Éxito", true);
+         Modal.show("Pago realizado", "Éxito", true);
 
-          localStorage.removeItem("carrito");
+           //1. Limpiar storage
+            localStorage.removeItem("carrito");
 
-          setTimeout(() => {
+           //2. Limpiar variable global
+             carrito = [];
+
+            //3. Actualizar contador visual
+            actualizarContadorCarrito();
+
+            // 4. Limpiar página del carrito guardada
+            localStorage.removeItem("paginaCarrito");
+
+            // 5. Forzar navegación limpia
+            setTimeout(() => {
             window.location.hash = "/";
           }, 1500);
         };
